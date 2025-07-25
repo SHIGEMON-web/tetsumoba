@@ -80,12 +80,14 @@
         }
         
         .section {
-            padding: 30px 20px;
+            padding: 40px 20px;
+            background: #f8f9fa;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 1.5rem;
         }
         
         h2 {
@@ -97,7 +99,7 @@
         /* ポスター・マップセクション */
         .media-section {
             padding: 40px 20px;
-            background: #f8f8f8;
+            background: #ffffff;
         }
         
         .media-grid {
@@ -210,21 +212,29 @@
         
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .exhibitor {
-            background: #f8f8f8;
-            border-radius: 8px;
+            background: #ffffff;
+            border-radius: 12px;
             overflow: hidden;
             position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .exhibitor:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
         
         .exhibitor-img {
             width: 100%;
-            padding-top: 100%; /* 1:1 アスペクト比 */
-            background: #ddd;
+            padding-top: 100%;
             position: relative;
             overflow: hidden;
         }
@@ -235,6 +245,8 @@
             left: 0;
             width: 100%;
             height: 100%;
+            font-size: 0;
+            color: transparent;
         }
         
         .exhibitor-img img {
@@ -250,11 +262,12 @@
             right: 8px;
             background: #ef4444;
             color: white;
-            padding: 3px 6px;
+            padding: 4px 8px;
             border-radius: 4px;
             font-size: 0.7rem;
             font-weight: bold;
             z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         .osaka-badge {
@@ -262,17 +275,20 @@
         }
         
         .exhibitor-info {
-            padding: 12px;
+            padding: 15px;
+            background: #ffffff;
         }
         
         .exhibitor-info h3 {
-            font-size: 1rem;
-            margin-bottom: 4px;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+            color: #15803d;
+            font-weight: 600;
         }
         
         .exhibitor-info p {
-            font-size: 0.85rem;
-            color: #666;
+            font-size: 0.8rem;
+            color: #64748b;
             line-height: 1.4;
             margin: 0;
         }
@@ -316,11 +332,16 @@
         
         @media (max-width: 1024px) {
             .grid-3 {
-                grid-template-columns: repeat(3, 1fr); /* タブレットでは3列 */
+                grid-template-columns: repeat(3, 1fr);
             }
         }
         
         @media (max-width: 768px) {
+            .navbar {
+                height: 60px;
+                padding: 0.8rem 0;
+            }
+
             .hero {
                 padding: 60px 15px 30px;
             }
@@ -416,6 +437,33 @@
                 height: 250px;
             }
         }
+        
+        @media (max-width: 480px) {
+            .navbar {
+                height: 50px;
+                padding: 0.7rem 0;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .hero {
+                margin-top: 95px;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -482,10 +530,8 @@
             
             <div class="grid-3">
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/aozora-densha.jpg" alt="あおぞら電車">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/aozora-densha.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>あおぞら電車</h3>
@@ -494,10 +540,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/almodel.jpg" alt="アルモデル">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/almodel.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>アルモデル</h3>
@@ -506,10 +550,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/iori-kobo.jpg" alt="ＩＯＲＩ工房">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/iori-kobo.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>ＩＯＲＩ工房</h3>
@@ -518,10 +560,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/ikeda-modeling.jpg" alt="イケダモデリング">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/ikeda-modeling.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>イケダモデリング</h3>
@@ -530,11 +570,9 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
+                    <div class="exhibitor-img" style="background-image: url('images/egg-kobo.jpg'); background-size: cover; background-position: center;">
                         <span class="new-badge">初参加</span>
-                        <div class="exhibitor-img-content">
-                            <img src="images/egg-kobo.jpg" alt="エッグ工房">
-                        </div>
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>エッグ工房</h3>
@@ -543,10 +581,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/n-goya.jpg" alt="エヌ小屋">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/n-goya.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>エヌ小屋</h3>
@@ -555,10 +591,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/nshell.jpg" alt="Nshell">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/nshell.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>Nshell</h3>
@@ -567,11 +601,9 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
+                    <div class="exhibitor-img" style="background-image: url('images/katsumi.jpg'); background-size: cover; background-position: center;">
                         <span class="new-badge">初参加</span>
-                        <div class="exhibitor-img-content">
-                            <img src="images/katsumi.jpg" alt="株式会社カツミ">
-                        </div>
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>株式会社　カツミ</h3>
@@ -580,10 +612,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/kato.jpg" alt="株式会社カトー">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/kato.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>株式会社　カトー</h3>
@@ -592,10 +622,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/kato-kyoto.jpg" alt="KATO京都駅店">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/kato-kyoto.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>KATO京都駅店</h3>
@@ -604,10 +632,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/kishu-tetsudo.jpg" alt="紀州鉄道株式会社">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/kishu-tetsudo.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>紀州鉄道株式会社</h3>
@@ -616,11 +642,9 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
+                    <div class="exhibitor-img" style="background-image: url('images/kiha-kobo.jpg'); background-size: cover; background-position: center;">
                         <span class="new-badge">初参加</span>
-                        <div class="exhibitor-img-content">
-                            <img src="images/kiha-kobo.jpg" alt="キハ工房">
-                        </div>
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>キハ工房</h3>
@@ -629,10 +653,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/wakiyaku-kurochan.jpg" alt="黒木製作所【わき役黒ちゃん】">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/wakiyaku-kurochan.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>黒木製作所【わき役黒ちゃん】</h3>
@@ -641,11 +663,9 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
+                    <div class="exhibitor-img" style="background-image: url('images/keishin-model.jpg'); background-size: cover; background-position: center;">
                         <span class="new-badge">初参加</span>
-                        <div class="exhibitor-img-content">
-                            <img src="images/keishin-model.jpg" alt="京神模型">
-                        </div>
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>京神模型</h3>
@@ -654,10 +674,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/kofu-model.jpg" alt="甲府モデル">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/kofu-model.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>甲府モデル</h3>
@@ -666,10 +684,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/kobo-sakura.jpg" alt="工房さくら鉄道">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/kobo-sakura.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>工房さくら鉄道</h3>
@@ -678,10 +694,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/korindo.jpg" alt="コリン堂">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/korindo.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>コリン堂</h3>
@@ -690,10 +704,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/diorama-yn.jpg" alt="ジオラマ工房Ｙ．Ｎ．">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/diorama-yn.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>ジオラマ工房Ｙ．Ｎ．</h3>
@@ -702,10 +714,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/shigemon-shop.jpg" alt="SHIGEMON SHOP">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/shigemon-shop.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>SHIGEMON SHOP</h3>
@@ -714,11 +724,9 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
+                    <div class="exhibitor-img" style="background-image: url('images/tsugawa-yoko.jpg'); background-size: cover; background-position: center;">
                         <span class="new-badge">初参加</span>
-                        <div class="exhibitor-img-content">
-                            <img src="images/tsugawa-yoko.jpg" alt="株式会社津川洋行">
-                        </div>
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>株式会社　津川洋行</h3>
@@ -727,11 +735,9 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
+                    <div class="exhibitor-img" style="background-image: url('images/tetsudo-mokei-dojo.jpg'); background-size: cover; background-position: center;">
                         <span class="new-badge">初参加</span>
-                        <div class="exhibitor-img-content">
-                            <img src="images/tetsudo-mokei-dojo.jpg" alt="鉄道模型道場">
-                        </div>
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>鉄道模型道場</h3>
@@ -740,10 +746,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/toma-model-works.jpg" alt="トーマモデルワークス">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/toma-model-works.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>トーマモデルワークス</h3>
@@ -752,10 +756,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/tramway.jpg" alt="トラムウェイ">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/tramway.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>トラムウェイ</h3>
@@ -764,10 +766,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/treasure-town.jpg" alt="トレジャータウン">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/treasure-town.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>トレジャータウン</h3>
@@ -776,11 +776,9 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
+                    <div class="exhibitor-img" style="background-image: url('images/noel-corporation.jpg'); background-size: cover; background-position: center;">
                         <span class="new-badge">初参加</span>
-                        <div class="exhibitor-img-content">
-                            <img src="images/noel-corporation.jpg" alt="ノエルコーポレーション">
-                        </div>
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>ノエルコーポレーション</h3>
@@ -789,10 +787,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/baiodo.jpg" alt="梅桜堂">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/baiodo.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>梅桜堂</h3>
@@ -801,10 +797,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/fuji-dream.jpg" alt="フジドリームスタジオ５０１">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/fuji-dream.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>フジドリームスタジオ５０１</h3>
@@ -813,10 +807,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/playtechnos.jpg" alt="プレイテクノス">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/playtechnos.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>プレイテクノス</h3>
@@ -825,10 +817,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/rodo.jpg" alt="株式会社朗堂">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/rodo.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>株式会社　朗堂</h3>
@@ -837,10 +827,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/hobby-shop-tamtam.jpg" alt="ホビーショップタムタム">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/hobby-shop-tamtam.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>ホビーショップタムタム</h3>
@@ -849,10 +837,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/miyako-model.jpg" alt="みやこ模型">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/miyako-model.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>みやこ模型</h3>
@@ -861,10 +847,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/mokei-kobo-parmil.jpg" alt="模型工房パーミル">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/mokei-kobo-parmil.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>模型工房パーミル</h3>
@@ -873,10 +857,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/mokei-maruya.jpg" alt="模型の丸屋">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/mokei-maruya.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>模型の丸屋</h3>
@@ -885,10 +867,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/model-kobo-p6.jpg" alt="MODEL工房P-6">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/model-kobo-p6.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>MODEL工房P-6</h3>
@@ -897,11 +877,9 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
+                    <div class="exhibitor-img" style="background-image: url('images/yoshikawa-factory.jpg'); background-size: cover; background-position: center;">
                         <span class="new-badge">初参加</span>
-                        <div class="exhibitor-img-content">
-                            <img src="images/yoshikawa-factory.jpg" alt="ヨシカワ第一工廠">
-                        </div>
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>ヨシカワ第一工廠</h3>
@@ -910,10 +888,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/yomitex.jpg" alt="ヨミテックス">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/yomitex.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>ヨミテックス</h3>
@@ -922,10 +898,8 @@
                 </div>
                 
                 <div class="exhibitor">
-                    <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            <img src="images/rail-classic.jpg" alt="レイルクラッシック">
-                        </div>
+                    <div class="exhibitor-img" style="background-image: url('images/rail-classic.jpg'); background-size: cover; background-position: center;">
+                        <div class="exhibitor-img-content"></div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>レイルクラッシック</h3>
@@ -936,7 +910,7 @@
         </div>
     </section>
     
-    <section class="section" style="background: #f8f8f8;">
+    <section class="section" style="background: #ffffff;">
         <div class="container">
             <h2>アクセス</h2>
             <div class="map-box">
