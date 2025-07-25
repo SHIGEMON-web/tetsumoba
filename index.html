@@ -27,6 +27,7 @@
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(0,0,0,0.15);
             backdrop-filter: blur(10px);
+            height: 70px; /* 固定高さを追加 */
         }
 
         .nav-container {
@@ -121,7 +122,7 @@
 
         /* セクション共通 */
         .section {
-            padding: 3rem 0;
+            padding: 2rem 0;
         }
 
         .container {
@@ -133,7 +134,7 @@
         .section-title {
             text-align: center;
             font-size: 2.2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             color: #1e3a8a;
         }
 
@@ -145,14 +146,14 @@
         .about-content {
             text-align: center;
             font-size: 1.1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             color: #64748b;
         }
 
         .locations {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
             max-width: 900px;
             margin: 0 auto;
         }
@@ -224,15 +225,30 @@
             position: relative;
         }
 
-        .events::after {
-            content: "etc...";
-            position: absolute;
-            bottom: 2rem;
-            right: 2rem;
+        .events-container {
+            position: relative;
+        }
+
+        .events-etc {
+            text-align: right;
             color: #9ca3af;
             font-style: italic;
             font-size: 1.1rem;
             font-weight: 500;
+            margin-top: 1.5rem;
+            padding-right: 2rem;
+        }
+
+        .events-description {
+            text-align: center;
+            color: #64748b;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            padding: 0 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .events-grid {
@@ -285,13 +301,16 @@
         }
 
         .event-card h3 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: #1e3a8a;
             margin-bottom: 0.8rem;
+            font-weight: 600;
         }
 
         .event-card p {
             color: #64748b;
+            line-height: 1.6;
+            font-size: 0.9rem;
         }
 
         /* 過去の開催実績 */
@@ -302,7 +321,7 @@
         .tabs {
             display: flex;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             border-bottom: 2px solid #e5e7eb;
         }
 
@@ -339,7 +358,7 @@
         .history-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .history-card {
@@ -407,7 +426,7 @@
         }
 
         .history-card h3 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #1e3a8a;
             margin-bottom: 0.8rem;
         }
@@ -415,8 +434,8 @@
         .history-stats {
             display: flex;
             flex-direction: column;
-            gap: 0.3rem;
-            margin-bottom: 1rem;
+            gap: 0.2rem;
+            margin-bottom: 0.8rem;
             font-size: 0.9rem;
             color: #64748b;
         }
@@ -570,7 +589,7 @@
         .twitter {
             background: linear-gradient(135deg, #1e3a8a, #3b82f6);
             color: white;
-            padding: 2rem 0;
+            padding: 1.5rem 0;
         }
 
         .twitter .section-title {
@@ -608,6 +627,14 @@
             font-weight: 600;
             font-size: 0.95rem;
             transition: all 0.3s;
+        }
+
+        .hashtag:first-child {
+            color: #059669; /* 緑色 */
+        }
+
+        .hashtag:last-child {
+            color: #ea580c; /* オレンジ色 */
         }
 
         .hashtag:hover {
@@ -779,19 +806,27 @@
         }
 
         @media (max-width: 768px) {
+            .navbar {
+                height: 60px; /* スマホ用の高さ */
+                padding: 0.8rem 0;
+            }
+
             .nav-links {
                 display: none;
             }
 
             .next-event-banner {
                 font-size: 0.8rem;
-                padding: 0.7rem 0;
+                padding: 0.7rem 1rem;
+                top: 60px; /* ナビバーの高さに合わせて調整 */
+                white-space: normal; /* スマホでは改行を許可 */
+                line-height: 1.4;
             }
 
             .hero {
                 height: 30vh;
                 min-height: 250px;
-                margin-top: 110px;
+                margin-top: 110px; /* 60px(nav) + 50px(banner) */
             }
 
             .hero-content h1 {
@@ -824,8 +859,12 @@
             }
 
             .events::after {
-                bottom: 1rem;
-                right: 1rem;
+                display: none;
+            }
+
+            .events-etc {
+                margin-top: 1.5rem;
+                padding-right: 1rem;
                 font-size: 1rem;
             }
 
@@ -865,8 +904,23 @@
         }
 
         @media (max-width: 480px) {
+            .navbar {
+                height: 50px; /* より小さい画面用 */
+                padding: 0.7rem 0;
+            }
+
             .logo {
                 font-size: 1.2rem;
+            }
+
+            .next-event-banner {
+                font-size: 0.75rem;
+                padding: 0.6rem 0.5rem;
+                top: 50px;
+            }
+
+            .hero {
+                margin-top: 95px; /* 50px(nav) + 45px(banner) */
             }
 
             .hero-content h1 {
@@ -897,7 +951,7 @@
 
             .event-card h3,
             .history-card h3 {
-                font-size: 1.2rem;
+                font-size: 1.05rem;
             }
 
             .tabs {
@@ -927,6 +981,12 @@
                 font-size: 0.8rem;
                 padding: 0.4rem 0.8rem;
             }
+
+            .events-etc {
+                margin-top: 1rem;
+                padding-right: 0.5rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -947,7 +1007,7 @@
 
     <!-- 次回開催告知バナー -->
     <div class="next-event-banner" onclick="openNextEvent()">
-        【次回予告】2026年 1月10日(土)/11日(日) 第12回 おおさか鉄道模型バザール
+        <span class="banner-text">【次回予告】2026年 1月10日(土)/11日(日) 第12回 おおさか鉄道模型バザール</span>
     </div>
 
     <!-- ヒーローセクション -->
@@ -996,34 +1056,42 @@
 
     <!-- イベント内容 -->
     <section id="events" class="section events">
-        <div class="container">
+        <div class="container events-container">
             <h2 class="section-title">イベント内容</h2>
+            
+            <div class="events-description">
+                <p>鉄道模型バザールは人気の鉄道模型メーカーやショップが集まる物販イベントです。<br>
+                物販以外にも多くのお客様に楽しんでいただくためにコンテンツもご用意しています。<br>
+                開催内容はイベントによって異なりますので最新情報を是非チェックしてください。</p>
+            </div>
             
             <div class="events-grid">
                 <div class="event-card">
                     <div class="event-image shop-bg"></div>
                     <div class="event-content">
-                        <h3>物販</h3>
-                        <p>新品・中古の鉄道模型から、レアなコレクターアイテムまで。全国の専門店が出店し、ここでしか手に入らない商品も多数ご用意しています。</p>
+                        <h3>人気商品の販売・新製品の展示</h3>
+                        <p>各出展社による話題の新製品の展示や、人気商品を購入できます。新品だけでなく、中古品の販売も。レアなアイテムが見つかるかも？</p>
                     </div>
                 </div>
                 
                 <div class="event-card">
                     <div class="event-image diorama-bg"></div>
                     <div class="event-content">
-                        <h3>ジオラマ展示</h3>
-                        <p>プロ・アマチュア問わず、精巧に作り込まれたジオラマを展示。実際に列車を走らせる運転体験コーナーもあり、お子様にも大人気です。</p>
+                        <h3>ジオラマ展示・フォトスポット</h3>
+                        <p>コンテスト作品を間近で見ることができます。お気に入りの模型を持ち込んでジオラマに載せて写真が撮れるフォトスポットも人気です。</p>
                     </div>
                 </div>
                 
                 <div class="event-card">
                     <div class="event-image seminar-bg"></div>
                     <div class="event-content">
-                        <h3>セミナー</h3>
-                        <p>模型製作のテクニックから、実車の歴史まで。専門家による講演やワークショップで、鉄道模型の奥深い世界を学べます。</p>
+                        <h3>工作実演・セミナー</h3>
+                        <p>工作の実演と一緒に体験できるワークショップや、出展社による新製品解説・セミナーなどを開催することもあります。</p>
                     </div>
                 </div>
             </div>
+            
+            <div class="events-etc">etc.</div>
         </div>
     </section>
 
@@ -1040,12 +1108,8 @@
             <!-- おおさか会場の実績 -->
             <div id="osaka-tab" class="tab-content active">
                 <div class="history-grid">
-                    <div class="history-card">
-                        <div class="history-image history-2024-osaka">
-                            <div class="history-overlay">
-                                <div class="history-date">2024年12月14日・15日</div>
-                            </div>
-                        </div>
+                    <div class="history-card" onclick="window.location.href='osaka011.html'" style="cursor: pointer;">
+                        <div class="history-image history-2024-osaka"></div>
                         <div class="history-content">
                             <h3>第11回 おおさか鉄道模型バザール</h3>
                             <div class="history-stats">
@@ -1058,11 +1122,7 @@
                     </div>
 
                     <div class="history-card">
-                        <div class="history-image history-2023-osaka">
-                            <div class="history-overlay">
-                                <div class="history-date">2024年1月20日・21日</div>
-                            </div>
-                        </div>
+                        <div class="history-image history-2023-osaka"></div>
                         <div class="history-content">
                             <h3>第10回 おおさか鉄道模型バザール</h3>
                             <div class="history-stats">
@@ -1075,11 +1135,7 @@
                     </div>
 
                     <div class="history-card">
-                        <div class="history-image history-2024-osaka">
-                            <div class="history-overlay">
-                                <div class="history-date">2023年1月21日・22日</div>
-                            </div>
-                        </div>
+                        <div class="history-image history-2024-osaka"></div>
                         <div class="history-content">
                             <h3>第9回 おおさか鉄道模型バザール</h3>
                             <div class="history-stats">
@@ -1096,14 +1152,10 @@
             <!-- ナゴヤ会場の実績 -->
             <div id="nagoya-tab" class="tab-content">
                 <div class="history-grid">
-                    <div class="history-card">
-                        <div class="history-image history-2024-nagoya">
-                            <div class="history-overlay">
-                                <div class="history-date">2025年5月24日・25日</div>
-                            </div>
-                        </div>
+                    <div class="history-card" onclick="window.location.href='nagoya007.html'" style="cursor: pointer;">
+                        <div class="history-image history-2024-nagoya"></div>
                         <div class="history-content">
-                            <h3><a href="#" onclick="openEventPage()" style="color: #1e3a8a; text-decoration: none;">第7回 ナゴヤ鉄道模型バザール</a></h3>
+                            <h3>第7回 ナゴヤ鉄道模型バザール</h3>
                             <div class="history-stats">
                                 <span>開催日: 2025年5月24日(土)/25日(日)</span>
                                 <span>出展社: 25社</span>
@@ -1114,11 +1166,7 @@
                     </div>
 
                     <div class="history-card">
-                        <div class="history-image history-2023-nagoya">
-                            <div class="history-overlay">
-                                <div class="history-date">2024年5月18日・19日</div>
-                            </div>
-                        </div>
+                        <div class="history-image history-2023-nagoya"></div>
                         <div class="history-content">
                             <h3>第6回 ナゴヤ鉄道模型バザール</h3>
                             <div class="history-stats">
@@ -1131,11 +1179,7 @@
                     </div>
 
                     <div class="history-card">
-                        <div class="history-image history-2024-nagoya">
-                            <div class="history-overlay">
-                                <div class="history-date">2022年4月2日・3日</div>
-                            </div>
-                        </div>
+                        <div class="history-image history-2024-nagoya"></div>
                         <div class="history-content">
                             <h3>第5回 ナゴヤ鉄道模型バザール</h3>
                             <div class="history-stats">
@@ -1218,7 +1262,7 @@
             <h2 class="section-title">お問い合わせ</h2>
             <p style="text-align: center; color: #64748b; margin-bottom: 2rem;">各種お問い合わせは以下のフォームよりお願いいたします。</p>
             
-            <form class="contact-form" action="mailto:shigemaru1227@gmail.com" method="post" enctype="text/plain" onsubmit="handleSubmit(event)">
+            <form class="contact-form" id="contactForm">
                 <div class="form-group">
                     <label for="name">お名前 *</label>
                     <input type="text" id="name" name="name" required>
@@ -1241,6 +1285,11 @@
                 
                 <button type="submit" class="submit-btn">送信する</button>
             </form>
+            
+            <!-- フォーム送信後のメッセージ -->
+            <div id="formMessage" style="display: none; text-align: center; padding: 2rem; background: #10b981; color: white; border-radius: 8px; margin-top: 1rem;">
+                お問い合わせを受け付けました。メールクライアントが開きますので、送信を完了してください。
+            </div>
             
             <div class="privacy-notice">
                 <p><strong>個人情報の保護について</strong></p>
@@ -1271,29 +1320,47 @@
             });
         });
 
-        // フォーム送信処理
-        function handleSubmit(event) {
-            event.preventDefault();
+        // フォーム送信処理（改善版）
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
             // フォームデータを取得
-            const formData = new FormData(event.target);
+            const formData = new FormData(e.target);
             const name = formData.get('name');
             const email = formData.get('email');
-            const subject = formData.get('subject') || 'お問い合わせ';
+            const subject = formData.get('subject') || '鉄道模型バザールお問い合わせ';
             const message = formData.get('message');
             
-            // メール本文を作成
-            const emailBody = `お名前: ${name}\nメールアドレス: ${email}\n件名: ${subject}\n\nお問い合わせ内容:\n${message}`;
+            // メール本文を作成（改行を適切に処理）
+            const emailBody = `【鉄道模型バザール公式サイトからのお問い合わせ】
+
+お名前: ${name}
+メールアドレス: ${email}
+件名: ${subject}
+
+お問い合わせ内容:
+${message}
+
+---
+このメールは鉄道模型バザール公式サイトのお問い合わせフォームから送信されました。`;
             
-            // mailtoリンクを作成
+            // mailtoリンクを作成（エンコーディングを改善）
             const mailtoLink = `mailto:shigemaru1227@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
             
-            // メールクライアントを開く
-            window.location.href = mailtoLink;
+            // メッセージを表示
+            document.getElementById('formMessage').style.display = 'block';
             
-            // 送信完了メッセージ
-            alert('メールクライアントが開きます。送信を完了してください。');
-        }
+            // メールクライアントを開く
+            setTimeout(() => {
+                window.location.href = mailtoLink;
+            }, 500);
+            
+            // フォームをリセット
+            setTimeout(() => {
+                e.target.reset();
+                document.getElementById('formMessage').style.display = 'none';
+            }, 5000);
+        });
 
         // 次回イベントページを開く
         function openNextEvent() {
@@ -1304,12 +1371,7 @@
             // window.open('osaka-12th.html', '_blank');
         }
 
-        // 第7回ナゴヤイベントページを開く
-        function openEventPage() {
-            // 新しいウィンドウで第7回ナゴヤ鉄道模型バザールページを開く
-            window.open('', '_blank');
-            alert('第7回 ナゴヤ鉄道模型バザールの詳細ページが開きます。\n実際の実装では、別のHTMLファイルにリンクします。');
-        }
+        // 第7回ナゴヤイベントページを開く（不要なので削除）
 
         // タブ切り替え機能
         function switchTab(tabName) {
