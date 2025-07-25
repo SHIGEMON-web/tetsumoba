@@ -94,8 +94,7 @@
 
         /* ヒーローセクション */
         .hero {
-            background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(59, 130, 246, 0.8)), 
-                        url('images/hero-bg.jpg');
+            background: url('images/hero-bg.jpg');
             background-size: cover;
             background-position: center;
             height: 35vh;
@@ -106,6 +105,14 @@
             text-align: center;
             color: white;
             margin-top: 120px;
+            position: relative;
+        }
+
+        /* テキストを見やすくするための背景 */
+        .hero-content {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
         }
 
         .hero-content h1 {
@@ -181,15 +188,13 @@
         }
 
         .osaka-bg {
-            background: linear-gradient(rgba(30, 58, 138, 0.3), rgba(59, 130, 246, 0.3)), 
-                        url('images/osaka-location.jpg');
+            background: url('images/osaka-location.jpg');
             background-size: cover;
             background-position: center;
         }
 
         .nagoya-bg {
-            background: linear-gradient(rgba(30, 58, 138, 0.3), rgba(59, 130, 246, 0.3)), 
-                        url('images/nagoya-location.jpg');
+            background: url('images/nagoya-location.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -288,22 +293,19 @@
         }
 
         .shop-bg {
-            background: linear-gradient(rgba(59, 130, 246, 0.3), rgba(147, 197, 253, 0.3)), 
-                        url('images/event-shop.jpg');
+            background: url('images/event-shop.jpg');
             background-size: cover;
             background-position: center;
         }
 
         .diorama-bg {
-            background: linear-gradient(rgba(16, 185, 129, 0.3), rgba(52, 211, 153, 0.3)), 
-                        url('images/event-diorama.jpg');
+            background: url('images/event-diorama.jpg');
             background-size: cover;
             background-position: center;
         }
 
         .seminar-bg {
-            background: linear-gradient(rgba(139, 92, 246, 0.3), rgba(196, 181, 253, 0.3)), 
-                        url('images/event-seminar.jpg');
+            background: url('images/event-seminar.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -395,29 +397,25 @@
         }
 
         .history-2024-osaka {
-            background: linear-gradient(rgba(59, 130, 246, 0.3), rgba(147, 197, 253, 0.3)), 
-                        url('images/history-osaka-11.jpg');
+            background: url('images/history-osaka-11.jpg');
             background-size: cover;
             background-position: center;
         }
 
         .history-2023-osaka {
-            background: linear-gradient(rgba(16, 185, 129, 0.3), rgba(52, 211, 153, 0.3)), 
-                        url('images/history-osaka-10.jpg');
+            background: url('images/history-osaka-10.jpg');
             background-size: cover;
             background-position: center;
         }
 
         .history-2024-nagoya {
-            background: linear-gradient(rgba(139, 92, 246, 0.3), rgba(196, 181, 253, 0.3)), 
-                        url('images/history-nagoya-7.jpg');
+            background: url('images/history-nagoya-7.jpg');
             background-size: cover;
             background-position: center;
         }
 
         .history-2023-nagoya {
-            background: linear-gradient(rgba(245, 158, 11, 0.3), rgba(251, 191, 36, 0.3)), 
-                        url('images/history-nagoya-6.jpg');
+            background: url('images/history-nagoya-6.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -1155,7 +1153,7 @@
                     </div>
 
                     <div class="history-card">
-                        <div class="history-image history-2024-osaka" style="background: linear-gradient(rgba(59, 130, 246, 0.3), rgba(147, 197, 253, 0.3)), url('images/history-osaka-9.jpg'); background-size: cover; background-position: center;"></div>
+                        <div class="history-image" style="background: url('images/history-osaka-9.jpg'); background-size: cover; background-position: center;"></div>
                         <div class="history-content">
                             <h3>第9回 おおさか鉄道模型バザール</h3>
                             <div class="history-stats">
@@ -1199,7 +1197,7 @@
                     </div>
 
                     <div class="history-card">
-                        <div class="history-image history-2024-nagoya" style="background: linear-gradient(rgba(139, 92, 246, 0.3), rgba(196, 181, 253, 0.3)), url('images/history-nagoya-5.jpg'); background-size: cover; background-position: center;"></div>
+                        <div class="history-image" style="background: url('images/history-nagoya-5.jpg'); background-size: cover; background-position: center;"></div>
                         <div class="history-content">
                             <h3>第5回 ナゴヤ鉄道模型バザール</h3>
                             <div class="history-stats">
