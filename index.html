@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鉄道模型バザール | 公式サイト</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* ナビゲーション */
+        .navbar {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fbbf24;
+        }
+
+        /* 次回開催告知バナー */
+        .next-event-banner {
+            background: linear-gradient(45deg, #dc2626, #ef4444);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(220, 38, 38, 0.3);
+            animation: pulse 2s infinite;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .next-event-banner:hover {
+            background: linear-gradient(45deg, #b91c1c, #dc2626);
+            transform: scale(1.01);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(59, 130, 246, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23e5e7eb" width="1200" height="600"/><path fill="%236b7280" d="M0 500h200l50-100h100l50 100h200l50-100h100l50 100h200l50-100h100l50 100h200V600H0z"/><rect fill="%23374151" x="100" y="80" width="120" height="80"/><rect fill="%23374151" x="300" y="100" width="100" height="60"/><rect fill="%23374151" x="500" y="90" width="110" height="70"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 35vh;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 120px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 0.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* セクション共通 */
+        .section {
+            padding: 3rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #1e3a8a;
+        }
+
+        /* 鉄道模型バザールとは */
+        .about {
+            background: #f8fafc;
+        }
+
+        .about-content {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #64748b;
+        }
+
+        .locations {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .location-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .location-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .location-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .osaka-bg {
+            background: linear-gradient(rgba(30, 58, 138, 0.3), rgba(59, 130, 246, 0.3)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250"><rect fill="%23f97316" width="400" height="250"/><rect fill="%23dc2626" x="0" y="100" width="400" height="50"/><circle fill="%23fbbf24" cx="80" cy="60" r="25"/><rect fill="%23374151" x="150" y="50" width="200" height="150"/><rect fill="%236b7280" x="170" y="70" width="30" height="80"/><rect fill="%236b7280" x="210" y="70" width="30" height="80"/><rect fill="%236b7280" x="250" y="70" width="30" height="80"/><rect fill="%236b7280" x="290" y="70" width="30" height="80"/><path fill="%23ef4444" d="M100 200l20-40h40l20 40z"/></svg>');
+        }
+
+        .nagoya-bg {
+            background: linear-gradient(rgba(30, 58, 138, 0.3), rgba(59, 130, 246, 0.3)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250"><rect fill="%2306b6d4" width="400" height="250"/><rect fill="%23059669" x="0" y="150" width="400" height="100"/><polygon fill="%23fbbf24" points="200,30 220,80 270,80 230,110 250,160 200,130 150,160 170,110 130,80 180,80"/><rect fill="%23374151" x="50" y="80" width="300" height="120"/><rect fill="%236b7280" x="80" y="100" width="25" height="60"/><rect fill="%236b7280" x="120" y="100" width="25" height="60"/><rect fill="%236b7280" x="160" y="100" width="25" height="60"/><rect fill="%236b7280" x="200" y="100" width="25" height="60"/><rect fill="%236b7280" x="240" y="100" width="25" height="60"/><rect fill="%236b7280" x="280" y="100" width="25" height="60"/></svg>');
+        }
+
+        .location-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6));
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+        }
+
+        .location-title {
+            color: white;
+            font-size: 1.6rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .location-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .location-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* イベント内容 */
+        .events {
+            background: white;
+            position: relative;
+        }
+
+        .events::after {
+            content: "etc...";
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            color: #9ca3af;
+            font-style: italic;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 2px solid transparent;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .shop-bg {
+            background: linear-gradient(rgba(59, 130, 246, 0.3), rgba(147, 197, 253, 0.3)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"><rect fill="%23fbbf24" width="300" height="150"/><rect fill="%23374151" x="50" y="30" width="200" height="90"/><rect fill="%236b7280" x="70" y="50" width="30" height="50"/><rect fill="%236b7280" x="110" y="50" width="30" height="50"/><rect fill="%236b7280" x="150" y="50" width="30" height="50"/><rect fill="%236b7280" x="190" y="50" width="30" height="50"/><rect fill="%23ef4444" x="230" y="60" width="15" height="30"/><circle fill="%23dc2626" cx="20" cy="130" r="8"/><circle fill="%2310b981" cx="280" cy="130" r="8"/></svg>');
+        }
+
+        .diorama-bg {
+            background: linear-gradient(rgba(16, 185, 129, 0.3), rgba(52, 211, 153, 0.3)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"><rect fill="%2306b6d4" width="300" height="150"/><rect fill="%23059669" x="0" y="100" width="300" height="50"/><polygon fill="%23374151" points="50,80 80,50 110,80 80,110"/><polygon fill="%23374151" points="150,90 180,60 210,90 180,120"/><rect fill="%23fbbf24" x="250" y="40" width="40" height="60"/><circle fill="%23ef4444" cx="30" cy="30" r="12"/><path fill="%23dc2626" d="M100 40l15-20h20l15 20z"/></svg>');
+        }
+
+        .seminar-bg {
+            background: linear-gradient(rgba(139, 92, 246, 0.3), rgba(196, 181, 253, 0.3)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"><rect fill="%23a855f7" width="300" height="150"/><rect fill="%23374151" x="20" y="20" width="260" height="110"/><rect fill="%23f3f4f6" x="40" y="40" width="100" height="70"/><circle fill="%23fbbf24" cx="200" cy="60" r="15"/><rect fill="%23ef4444" x="170" y="80" width="60" height="8"/><rect fill="%23ef4444" x="170" y="95" width="40" height="8"/><circle fill="%2310b981" cx="50" cy="130" r="6"/><circle fill="%2310b981" cx="70" cy="130" r="6"/><circle fill="%2310b981" cx="90" cy="130" r="6"/></svg>');
+        }
+
+        .event-content {
+            padding: 1.5rem;
+        }
+
+        .event-card h3 {
+            font-size: 1.4rem;
+            color: #1e3a8a;
+            margin-bottom: 0.8rem;
+        }
+
+        .event-card p {
+            color: #64748b;
+        }
+
+        /* 過去の開催実績 */
+        .history {
+            background: #f8fafc;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            position: relative;
+        }
+
+        .tab-button.active {
+            color: #1e3a8a;
+            border-bottom-color: #1e3a8a;
+        }
+
+        .tab-button:hover {
+            color: #1e3a8a;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .history-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .history-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .history-image {
+            width: 100%;
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .history-2024-osaka {
+            background: linear-gradient(rgba(59, 130, 246, 0.3), rgba(147, 197, 253, 0.3)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180"><rect fill="%23f97316" width="400" height="180"/><rect fill="%23374151" x="50" y="30" width="300" height="120"/><rect fill="%236b7280" x="80" y="60" width="40" height="60"/><rect fill="%236b7280" x="140" y="60" width="40" height="60"/><rect fill="%236b7280" x="200" y="60" width="40" height="60"/><rect fill="%236b7280" x="260" y="60" width="40" height="60"/><rect fill="%236b7280" x="320" y="60" width="40" height="60"/><circle fill="%23fbbf24" cx="60" cy="40" r="15"/><circle fill="%23ef4444" cx="340" cy="40" r="15"/></svg>');
+        }
+
+        .history-2023-osaka {
+            background: linear-gradient(rgba(16, 185, 129, 0.3), rgba(52, 211, 153, 0.3)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180"><rect fill="%2306b6d4" width="400" height="180"/><rect fill="%23059669" x="0" y="120" width="400" height="60"/><rect fill="%23374151" x="80" y="40" width="240" height="100"/><rect fill="%236b7280" x="100" y="60" width="30" height="60"/><rect fill="%236b7280" x="140" y="60" width="30" height="60"/><rect fill="%236b7280" x="180" y="60" width="30" height="60"/><rect fill="%236b7280" x="220" y="60" width="30" height="60"/><rect fill="%236b7280" x="260" y="60" width="30" height="60"/><rect fill="%236b7280" x="300" y="60" width="30" height="60"/></svg>');
+        }
+
+        .history-2024-nagoya {
+            background: linear-gradient(rgba(139, 92, 246, 0.3), rgba(196, 181, 253, 0.3)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180"><rect fill="%23a855f7" width="400" height="180"/><rect fill="%23374151" x="60" y="20" width="280" height="140"/><polygon fill="%23fbbf24" points="200,30 220,70 260,70 230,95 240,135 200,115 160,135 170,95 140,70 180,70"/><rect fill="%236b7280" x="90" y="90" width="25" height="50"/><rect fill="%236b7280" x="125" y="90" width="25" height="50"/><rect fill="%236b7280" x="250" y="90" width="25" height="50"/><rect fill="%236b7280" x="285" y="90" width="25" height="50"/></svg>');
+        }
+
+        .history-2023-nagoya {
+            background: linear-gradient(rgba(245, 158, 11, 0.3), rgba(251, 191, 36, 0.3)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180"><rect fill="%23f59e0b" width="400" height="180"/><rect fill="%23374151" x="40" y="40" width="320" height="100"/><rect fill="%236b7280" x="70" y="70" width="35" height="40"/><rect fill="%236b7280" x="120" y="70" width="35" height="40"/><rect fill="%236b7280" x="170" y="70" width="35" height="40"/><rect fill="%236b7280" x="220" y="70" width="35" height="40"/><rect fill="%236b7280" x="270" y="70" width="35" height="40"/><rect fill="%236b7280" x="320" y="70" width="35" height="40"/><circle fill="%23ef4444" cx="50" cy="20" r="8"/><circle fill="%2310b981" cx="350" cy="20" r="8"/></svg>');
+        }
+
+        .history-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6));
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+        }
+
+        .history-date {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .history-content {
+            padding: 1.5rem;
+        }
+
+        .history-card h3 {
+            font-size: 1.3rem;
+            color: #1e3a8a;
+            margin-bottom: 0.8rem;
+        }
+
+        .history-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .history-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* 特集記事セクション */
+        .articles {
+            background: white;
+            display: none; /* 記事がない間は非表示 */
+        }
+
+        .articles.show {
+            display: block; /* 記事がある時は .show クラスを追加して表示 */
+        }
+
+        .article-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tag-button {
+            background: #f3f4f6;
+            border: 2px solid transparent;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .tag-button:hover {
+            background: #e5e7eb;
+            color: #1e3a8a;
+        }
+
+        .tag-button.active {
+            background: #1e3a8a;
+            color: white;
+            border-color: #1e3a8a;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .article-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: #e5e7eb;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .article-tag {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: #1e3a8a;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-date {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-title {
+            font-size: 1.2rem;
+            color: #1e3a8a;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .article-excerpt {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .show-more-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .show-more-btn {
+            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .show-more-btn:hover {
+            background: linear-gradient(45deg, #1e40af, #2563eb);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
+        }
+
+        .articles-hidden {
+            display: none;
+        }
+
+        /* X(Twitter)セクション */
+        .twitter {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 2rem 0;
+        }
+
+        .twitter .section-title {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .twitter-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .twitter-description {
+            margin-bottom: 1rem;
+            color: #e5e7eb;
+            font-size: 0.95rem;
+        }
+
+        .hashtags {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .hashtag {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #1e3a8a;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .hashtag:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .twitter-btn {
+            background: white;
+            color: #1e3a8a;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .twitter-btn:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .twitter-logo {
+            width: 20px;
+            height: 20px;
+            fill: #1e3a8a;
+        }
+
+        /* お問い合わせフォーム */
+        .contact {
+            background: #f8fafc;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #1e40af, #2563eb);
+        }
+
+        .privacy-notice {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .privacy-notice p {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .privacy-notice p:last-child {
+            margin-bottom: 0;
+        }
+
+        .privacy-notice strong {
+            color: #1e3a8a;
+        }
+
+        /* フッター */
+        .footer {
+            background: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer p {
+            margin-bottom: 0.8rem;
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 1024px) {
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+
+            .next-event-banner {
+                font-size: 0.9rem;
+                padding: 0.8rem 0;
+            }
+
+            .hero {
+                margin-top: 120px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .locations {
+                gap: 1.5rem;
+            }
+
+            .events-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .history-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .next-event-banner {
+                font-size: 0.8rem;
+                padding: 0.7rem 0;
+            }
+
+            .hero {
+                height: 30vh;
+                min-height: 250px;
+                margin-top: 110px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section {
+                padding: 2rem 0;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .locations {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .events::after {
+                bottom: 1rem;
+                right: 1rem;
+                font-size: 1rem;
+            }
+
+            .history-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .hashtags {
+                gap: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hashtag {
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .twitter-btn {
+                font-size: 0.9rem;
+                padding: 0.7rem 1.3rem;
+            }
+
+            .twitter-logo {
+                width: 18px;
+                height: 18px;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .location-card .date {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .location-card .venue {
+                font-size: 1rem;
+            }
+
+            .event-card h3,
+            .history-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .tabs {
+                flex-direction: column;
+                border-bottom: none;
+            }
+
+            .tab-button {
+                padding: 1rem;
+                border-bottom: 2px solid #e5e7eb;
+                border-radius: 0;
+            }
+
+            .tab-button.active {
+                border-bottom-color: #1e3a8a;
+            }
+
+            .twitter .section-title {
+                font-size: 1.3rem;
+            }
+
+            .hashtags {
+                gap: 0.8rem;
+            }
+
+            .hashtag {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ナビゲーション -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">鉄道模型バザール</a>
+            <ul class="nav-links">
+                <li><a href="#about">バザールとは</a></li>
+                <li><a href="#events">イベント内容</a></li>
+                <li><a href="#history">過去のイベント</a></li>
+                <li><a href="#twitter">公式X</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 次回開催告知バナー -->
+    <div class="next-event-banner" onclick="openNextEvent()">
+        【次回予告】2026年 1月10日(土)/11日(日) 第12回 おおさか鉄道模型バザール
+    </div>
+
+    <!-- ヒーローセクション -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>鉄道模型バザール</h1>
+            <p>人気の鉄道模型メーカー＆ショップが大集合！<br>おおさか・ナゴヤで開催！</p>
+        </div>
+    </section>
+
+    <!-- 鉄道模型バザールとは -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">鉄道模型バザールとは？</h2>
+            <div class="about-content">
+                <p>各地から人気メーカー・ショップが一堂に会する、年に数回の特別なイベントです。<br>
+                新品・中古品を問わず、ここでしか手に入らない貴重なアイテムや<br>
+                最新の鉄道模型に出会えるチャンスをお見逃しなく！</p>
+            </div>
+            
+            <div class="locations">
+                <div class="location-card">
+                    <div class="location-image osaka-bg">
+                        <div class="location-overlay">
+                            <div class="location-title">おおさか鉄道模型バザール</div>
+                        </div>
+                    </div>
+                    <div class="location-content">
+                        <p>大阪梅田にて毎年年末ごろに開催。ディーラーやお客様も各地から集まります。普段買うことのできないアイテムを見つけるチャンスです。</p>
+                    </div>
+                </div>
+                
+                <div class="location-card">
+                    <div class="location-image nagoya-bg">
+                        <div class="location-overlay">
+                            <div class="location-title">ナゴヤ鉄道模型バザール</div>
+                        </div>
+                    </div>
+                    <div class="location-content">
+                        <p>中部の鉄道模型ファン必見のナゴヤでの販売会です。フォトスポットなどのコンテンツも。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- イベント内容 -->
+    <section id="events" class="section events">
+        <div class="container">
+            <h2 class="section-title">イベント内容</h2>
+            
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-image shop-bg"></div>
+                    <div class="event-content">
+                        <h3>物販</h3>
+                        <p>新品・中古の鉄道模型から、レアなコレクターアイテムまで。全国の専門店が出店し、ここでしか手に入らない商品も多数ご用意しています。</p>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-image diorama-bg"></div>
+                    <div class="event-content">
+                        <h3>ジオラマ展示</h3>
+                        <p>プロ・アマチュア問わず、精巧に作り込まれたジオラマを展示。実際に列車を走らせる運転体験コーナーもあり、お子様にも大人気です。</p>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-image seminar-bg"></div>
+                    <div class="event-content">
+                        <h3>セミナー</h3>
+                        <p>模型製作のテクニックから、実車の歴史まで。専門家による講演やワークショップで、鉄道模型の奥深い世界を学べます。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 過去の開催実績 -->
+    <section id="history" class="section history">
+        <div class="container">
+            <h2 class="section-title">過去に開催したイベント</h2>
+            
+            <div class="tabs">
+                <button class="tab-button active" onclick="switchTab('osaka')">おおさか会場</button>
+                <button class="tab-button" onclick="switchTab('nagoya')">ナゴヤ会場</button>
+            </div>
+
+            <!-- おおさか会場の実績 -->
+            <div id="osaka-tab" class="tab-content active">
+                <div class="history-grid">
+                    <div class="history-card">
+                        <div class="history-image history-2024-osaka">
+                            <div class="history-overlay">
+                                <div class="history-date">2024年12月14日・15日</div>
+                            </div>
+                        </div>
+                        <div class="history-content">
+                            <h3>第11回 おおさか鉄道模型バザール</h3>
+                            <div class="history-stats">
+                                <span>開催日: 2024年12月14日(土)/15日(日)</span>
+                                <span>出展社: 37社</span>
+                                <span>来場者数: 1,600名</span>
+                            </div>
+                            <p>過去最高の出展社数での開催となり、来場者数も過去最高となりました。入場記念ステッカーを配布しました。</p>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <div class="history-image history-2023-osaka">
+                            <div class="history-overlay">
+                                <div class="history-date">2024年1月20日・21日</div>
+                            </div>
+                        </div>
+                        <div class="history-content">
+                            <h3>第10回 おおさか鉄道模型バザール</h3>
+                            <div class="history-stats">
+                                <span>開催日: 2024年1月20日(土)/21日(日)</span>
+                                <span>出展社: 32社</span>
+                                <span>来場者数: 1,300名</span>
+                            </div>
+                            <p>本イベント初のステージを設置し、各業者さまのセミナーや新製品説明会を行いました。入場記念ステッカーを配布しました。</p>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <div class="history-image history-2024-osaka">
+                            <div class="history-overlay">
+                                <div class="history-date">2023年1月21日・22日</div>
+                            </div>
+                        </div>
+                        <div class="history-content">
+                            <h3>第9回 おおさか鉄道模型バザール</h3>
+                            <div class="history-stats">
+                                <span>開催日: 2023年1月21日(土)/22日(日)</span>
+                                <span>出展社: 31社</span>
+                                <span>来場者数: 1,200名</span>
+                            </div>
+                            <p>感染症対策をした上で実施しました。同時開催として全国高等学校鉄道模型コンテストの説明会とモジュールの展示を行いました。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ナゴヤ会場の実績 -->
+            <div id="nagoya-tab" class="tab-content">
+                <div class="history-grid">
+                    <div class="history-card">
+                        <div class="history-image history-2024-nagoya">
+                            <div class="history-overlay">
+                                <div class="history-date">2025年5月24日・25日</div>
+                            </div>
+                        </div>
+                        <div class="history-content">
+                            <h3><a href="#" onclick="openEventPage()" style="color: #1e3a8a; text-decoration: none;">第7回 ナゴヤ鉄道模型バザール</a></h3>
+                            <div class="history-stats">
+                                <span>開催日: 2025年5月24日(土)/25日(日)</span>
+                                <span>出展社: 25社</span>
+                                <span>来場者数: 800名</span>
+                            </div>
+                            <p>過去最高の出展社数での開催となり、来場者数も過去最高となりました。フォトスポットも実施しました。</p>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <div class="history-image history-2023-nagoya">
+                            <div class="history-overlay">
+                                <div class="history-date">2024年5月18日・19日</div>
+                            </div>
+                        </div>
+                        <div class="history-content">
+                            <h3>第6回 ナゴヤ鉄道模型バザール</h3>
+                            <div class="history-stats">
+                                <span>開催日: 2024年5月18日(土)/19日(日)</span>
+                                <span>出展社: 22社</span>
+                                <span>来場者数: 600名</span>
+                            </div>
+                            <p>全国高等学校鉄道模型コンテストのモジュールの展示を行いました。入場記念ステッカーを配布しました。</p>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <div class="history-image history-2024-nagoya">
+                            <div class="history-overlay">
+                                <div class="history-date">2022年4月2日・3日</div>
+                            </div>
+                        </div>
+                        <div class="history-content">
+                            <h3>第5回 ナゴヤ鉄道模型バザール</h3>
+                            <div class="history-stats">
+                                <span>開催日: 2022年4月2日(土)/3日(日)</span>
+                                <span>出展社: 12社</span>
+                                <span>来場者数: 500名</span>
+                            </div>
+                            <p>感染症対策をした上で実施しました。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特集記事セクション（記事がある時は class="section articles show" にする） -->
+    <section id="articles" class="section articles">
+        <div class="container">
+            <h2 class="section-title">特集記事</h2>
+            
+            <!-- タグフィルター -->
+            <div class="article-tags">
+                <button class="tag-button active" onclick="filterArticles('all')">すべて</button>
+                <button class="tag-button" onclick="filterArticles('event')">イベントレポート</button>
+                <button class="tag-button" onclick="filterArticles('interview')">インタビュー</button>
+                <button class="tag-button" onclick="filterArticles('product')">新製品情報</button>
+                <button class="tag-button" onclick="filterArticles('tips')">模型製作Tips</button>
+            </div>
+
+            <!-- 記事グリッド -->
+            <div class="articles-grid" id="articlesGrid">
+                <!-- 記事サンプル（実際の記事を追加する際のテンプレート） -->
+                <!--
+                <article class="article-card" data-tag="event" onclick="openArticle('article-1')">
+                    <div class="article-thumbnail">
+                        <img src="記事のサムネイル画像.jpg" alt="記事タイトル">
+                        <span class="article-tag">イベントレポート</span>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-date">2025年7月20日</div>
+                        <h3 class="article-title">第11回おおさか鉄道模型バザール開催レポート</h3>
+                        <p class="article-excerpt">過去最高の来場者数を記録した第11回の様子をレポート。出展社インタビューや会場の雰囲気をお伝えします...</p>
+                    </div>
+                </article>
+                -->
+            </div>
+
+            <!-- もっと見るボタン -->
+            <div class="show-more-container" id="showMoreContainer" style="display: none;">
+                <button class="show-more-btn" onclick="showMoreArticles()">もっと見る</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- X(Twitter)セクション -->
+    <section id="twitter" class="section twitter">
+        <div class="container">
+            <div class="twitter-content">
+                <h2 class="section-title">公式 X (旧：Twitter)で最新情報をチェック！</h2>
+                <p class="twitter-description">イベントの最新情報を発信しています！</p>
+                
+                <div class="hashtags">
+                    <div class="hashtag">#おおさか鉄道模型バザール</div>
+                    <div class="hashtag">#ナゴヤ鉄道模型バザール</div>
+                </div>
+                
+                <a href="#" class="twitter-btn" onclick="followTwitter()">
+                    <svg class="twitter-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    公式Xをフォロー
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- お問い合わせフォーム -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">お問い合わせ</h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 2rem;">各種お問い合わせは以下のフォームよりお願いいたします。</p>
+            
+            <form class="contact-form" action="mailto:shigemaru1227@gmail.com" method="post" enctype="text/plain" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">お名前 *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">メールアドレス *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">件名</label>
+                    <input type="text" id="subject" name="subject">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">お問い合わせ内容 *</label>
+                    <textarea id="message" name="message" placeholder="ご質問やご要望をお聞かせください" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">送信する</button>
+            </form>
+            
+            <div class="privacy-notice">
+                <p><strong>個人情報の保護について</strong></p>
+                <p>インターネットを通じて当ウェブサイトの「お問い合わせ」をご利用いただいた際に、必要な情報の元となるお客様の個人情報の取扱いを行いますが、お客様の個人情報を、お客様の同意なしに第三者に開示することはありません。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 鉄道模型バザール実行委員会. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // スムーススクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // フォーム送信処理
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // フォームデータを取得
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject') || 'お問い合わせ';
+            const message = formData.get('message');
+            
+            // メール本文を作成
+            const emailBody = `お名前: ${name}\nメールアドレス: ${email}\n件名: ${subject}\n\nお問い合わせ内容:\n${message}`;
+            
+            // mailtoリンクを作成
+            const mailtoLink = `mailto:shigemaru1227@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // メールクライアントを開く
+            window.location.href = mailtoLink;
+            
+            // 送信完了メッセージ
+            alert('メールクライアントが開きます。送信を完了してください。');
+        }
+
+        // 次回イベントページを開く
+        function openNextEvent() {
+            // 第12回おおさかイベントページを開く
+            // 実際の実装では、第12回用のHTMLファイルにリンク
+            alert('第12回 おおさか鉄道模型バザールの詳細ページを準備中です。\n開催が近づきましたら詳細情報を公開いたします。');
+            // 実際のページができたら以下のように変更：
+            // window.open('osaka-12th.html', '_blank');
+        }
+
+        // 第7回ナゴヤイベントページを開く
+        function openEventPage() {
+            // 新しいウィンドウで第7回ナゴヤ鉄道模型バザールページを開く
+            window.open('', '_blank');
+            alert('第7回 ナゴヤ鉄道模型バザールの詳細ページが開きます。\n実際の実装では、別のHTMLファイルにリンクします。');
+        }
+
+        // タブ切り替え機能
+        function switchTab(tabName) {
+            // すべてのタブボタンから active クラスを削除
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // すべてのタブコンテンツを非表示
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // クリックされたタブボタンにactiveクラスを追加
+            event.target.classList.add('active');
+            
+            // 対応するタブコンテンツを表示
+            document.getElementById(tabName + '-tab').classList.add('active');
+        }
+
+        // フォロー用関数
+        function followTwitter() {
+            window.open('https://twitter.com/tetsumobainfo', '_blank');
+        }
+
+        // 特集記事関連の関数
+        let currentTag = 'all';
+        let visibleArticles = 6; // 初期表示記事数
+        
+        // タグフィルター機能
+        function filterArticles(tag) {
+            currentTag = tag;
+            visibleArticles = 6; // リセット
+            
+            // タグボタンのアクティブ状態を更新
+            document.querySelectorAll('.tag-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // 記事のフィルタリング（実際の記事がある場合のコード）
+            const articles = document.querySelectorAll('.article-card');
+            let visibleCount = 0;
+            
+            articles.forEach((article, index) => {
+                if (tag === 'all' || article.dataset.tag === tag) {
+                    if (visibleCount < visibleArticles) {
+                        article.style.display = 'block';
+                        article.classList.remove('articles-hidden');
+                        visibleCount++;
+                    } else {
+                        article.style.display = 'none';
+                        article.classList.add('articles-hidden');
+                    }
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+            
+            // もっと見るボタンの表示制御
+            updateShowMoreButton();
+        }
+        
+        // もっと見る機能
+        function showMoreArticles() {
+            visibleArticles += 6;
+            filterArticles(currentTag);
+        }
+        
+        // もっと見るボタンの表示/非表示
+        function updateShowMoreButton() {
+            const articles = document.querySelectorAll('.article-card');
+            const filteredArticles = Array.from(articles).filter(article => 
+                currentTag === 'all' || article.dataset.tag === currentTag
+            );
+            
+            const showMoreContainer = document.getElementById('showMoreContainer');
+            if (filteredArticles.length > visibleArticles) {
+                showMoreContainer.style.display = 'block';
+            } else {
+                showMoreContainer.style.display = 'none';
+            }
+        }
+        
+        // 記事詳細ページを開く（将来的に実装）
+        function openArticle(articleId) {
+            // 記事詳細ページへ遷移
+            console.log('記事を開く:', articleId);
+            // window.location.href = `/articles/${articleId}.html`;
+        }
+        
+        // 記事を追加する関数（管理用）
+        function addArticle(articleData) {
+            const articlesGrid = document.getElementById('articlesGrid');
+            const articleHTML = `
+                <article class="article-card" data-tag="${articleData.tag}" onclick="openArticle('${articleData.id}')">
+                    <div class="article-thumbnail">
+                        <img src="${articleData.thumbnail}" alt="${articleData.title}">
+                        <span class="article-tag">${articleData.tagLabel}</span>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-date">${articleData.date}</div>
+                        <h3 class="article-title">${articleData.title}</h3>
+                        <p class="article-excerpt">${articleData.excerpt}</p>
+                    </div>
+                </article>
+            `;
+            articlesGrid.insertAdjacentHTML('beforeend', articleHTML);
+            
+            // 特集記事セクションを表示
+            document.querySelector('.articles').classList.add('show');
+            
+            // もっと見るボタンの更新
+            updateShowMoreButton();
+        }
+
+        // ナビゲーションの背景透明度調整
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(59, 130, 246, 0.95))';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, #1e3a8a, #3b82f6)';
+            }
+        });
+    </script>
+</body>
+</html>
