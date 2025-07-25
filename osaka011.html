@@ -104,20 +104,14 @@
         
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
         
         .media-item {
             text-align: center;
-        }
-        
-        .media-item h3 {
-            color: #15803d;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
         }
         
         .media-thumbnail {
@@ -499,15 +493,18 @@
             <h2>イベント情報</h2>
             <div class="media-grid">
                 <div class="media-item">
-                    <h3>イベントポスター</h3>
                     <div class="media-thumbnail" onclick="openModal('poster')">
-                        <img src="https://via.placeholder.com/400x600/16a34a/ffffff?text=イベントポスター" alt="第11回おおさか鉄道模型バザール ポスター">
+                        <img src="images/osaka-poster-011.jpg" alt="第11回おおさか鉄道模型バザール ポスター">
                     </div>
                 </div>
                 <div class="media-item">
-                    <h3>会場マップ</h3>
                     <div class="media-thumbnail" onclick="openModal('map')">
-                        <img src="https://via.placeholder.com/400x400/15803d/ffffff?text=会場マップ" alt="会場マップ">
+                        <img src="images/osaka-map-011.jpg" alt="会場マップ">
+                    </div>
+                </div>
+                <div class="media-item">
+                    <div class="media-thumbnail" onclick="openModal('photo')">
+                        <img src="images/osaka-photo-011.jpg" alt="集合写真">
                     </div>
                 </div>
             </div>
@@ -943,15 +940,20 @@
             const downloadBtn = document.getElementById('downloadBtn');
             
             if (type === 'poster') {
-                modalImg.src = 'https://via.placeholder.com/800x1200/16a34a/ffffff?text=イベントポスター（フルサイズ）';
+                modalImg.src = 'images/osaka-poster-011.jpg';
                 modalImg.alt = '第11回おおさか鉄道模型バザール ポスター';
                 downloadBtn.href = modalImg.src;
                 downloadBtn.download = 'osaka_railway_bazaar_poster.jpg';
             } else if (type === 'map') {
-                modalImg.src = 'https://via.placeholder.com/1000x1000/15803d/ffffff?text=会場マップ（フルサイズ）';
+                modalImg.src = 'images/osaka-map-011.jpg';
                 modalImg.alt = '会場マップ';
                 downloadBtn.href = modalImg.src;
                 downloadBtn.download = 'osaka_railway_bazaar_map.jpg';
+            } else if (type === 'photo') {
+                modalImg.src = 'images/osaka-photo-011.jpg';
+                modalImg.alt = '集合写真';
+                downloadBtn.href = modalImg.src;
+                downloadBtn.download = 'osaka_railway_bazaar_photo.jpg';
             }
             
             modal.style.display = 'block';

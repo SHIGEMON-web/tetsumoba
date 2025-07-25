@@ -136,20 +136,14 @@
         
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
         
         .media-item {
             text-align: center;
-        }
-        
-        .media-item h3 {
-            color: #1e3a8a;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
         }
         
         .media-thumbnail {
@@ -269,6 +263,9 @@
             padding-top: 100%; /* 1:1 アスペクト比 */
             position: relative;
             overflow: hidden;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
         }
         
         .exhibitor-img-content {
@@ -277,8 +274,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            font-size: 0; /* テキストを非表示 */
-            color: transparent; /* テキストを透明に */
+            font-size: 0;
+            color: transparent;
+            display: none; /* 完全に非表示にする */
         }
         
         .exhibitor-img img {
@@ -511,15 +509,18 @@
             <h2>イベント情報</h2>
             <div class="media-grid">
                 <div class="media-item">
-                    <h3>イベントポスター</h3>
                     <div class="media-thumbnail" onclick="openModal('poster')">
-                        <img src="https://via.placeholder.com/400x600/ea580c/ffffff?text=イベントポスター" alt="第7回ナゴヤ鉄道模型バザール ポスター">
+                        <img src="images/nagoya-poster-007.jpg" alt="第7回ナゴヤ鉄道模型バザール ポスター">
                     </div>
                 </div>
                 <div class="media-item">
-                    <h3>会場マップ</h3>
                     <div class="media-thumbnail" onclick="openModal('map')">
-                        <img src="https://via.placeholder.com/400x400/1e3a8a/ffffff?text=会場マップ" alt="会場マップ">
+                        <img src="images/nagoya-map-007.jpg" alt="会場マップ">
+                    </div>
+                </div>
+                <div class="media-item">
+                    <div class="media-thumbnail" onclick="openModal('photo')">
+                        <img src="images/nagoya-photo-007.jpg" alt="集合写真">
                     </div>
                 </div>
             </div>
@@ -844,15 +845,20 @@
             const downloadBtn = document.getElementById('downloadBtn');
             
             if (type === 'poster') {
-                modalImg.src = 'https://via.placeholder.com/800x1200/ea580c/ffffff?text=イベントポスター（フルサイズ）';
+                modalImg.src = 'images/nagoya-poster-007.jpg';
                 modalImg.alt = '第7回ナゴヤ鉄道模型バザール ポスター';
                 downloadBtn.href = modalImg.src;
                 downloadBtn.download = 'nagoya_railway_bazaar_poster.jpg';
             } else if (type === 'map') {
-                modalImg.src = 'https://via.placeholder.com/1000x1000/1e3a8a/ffffff?text=会場マップ（フルサイズ）';
+                modalImg.src = 'images/nagoya-map-007.jpg';
                 modalImg.alt = '会場マップ';
                 downloadBtn.href = modalImg.src;
                 downloadBtn.download = 'nagoya_railway_bazaar_map.jpg';
+            } else if (type === 'photo') {
+                modalImg.src = 'images/nagoya-photo-007.jpg';
+                modalImg.alt = '集合写真';
+                downloadBtn.href = modalImg.src;
+                downloadBtn.download = 'nagoya_railway_bazaar_photo.jpg';
             }
             
             modal.style.display = 'block';
