@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>第7回 ナゴヤ鉄道模型バザール</title>
+    
+    <!-- ファビコン設定 -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
     <style>
         body {
             margin: 0;
@@ -239,21 +244,29 @@
         
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(4, 1fr); /* 3列から4列に変更 */
+            gap: 20px; /* 間隔を少し広げる */
+            max-width: 1200px; /* 最大幅を設定 */
+            margin: 0 auto; /* 中央寄せ */
         }
         
         .exhibitor {
-            background: #f8f8f8;
-            border-radius: 8px;
+            background: #ffffff; /* 白背景を明確に */
+            border-radius: 12px; /* 角丸を少し大きく */
             overflow: hidden;
             position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 影を追加 */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .exhibitor:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
         
         .exhibitor-img {
             width: 100%;
             padding-top: 100%; /* 1:1 アスペクト比 */
-            background: #ddd;
             position: relative;
             overflow: hidden;
         }
@@ -279,11 +292,12 @@
             right: 8px;
             background: #ef4444;
             color: white;
-            padding: 3px 6px;
+            padding: 4px 8px; /* パディングを少し増やす */
             border-radius: 4px;
             font-size: 0.7rem;
             font-weight: bold;
             z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* 影を追加 */
         }
         
         .nagoya-badge {
@@ -291,19 +305,34 @@
         }
         
         .exhibitor-info {
-            padding: 12px;
+            padding: 15px; /* パディングを統一 */
+            background: #ffffff; /* 背景色を明確に */
         }
         
         .exhibitor-info h3 {
-            font-size: 1rem;
-            margin-bottom: 4px;
+            font-size: 0.95rem; /* フォントサイズを少し小さく */
+            margin-bottom: 6px;
+            color: #1e3a8a; /* タイトルに色を追加 */
+            font-weight: 600;
         }
         
         .exhibitor-info p {
-            font-size: 0.85rem;
-            color: #666;
+            font-size: 0.8rem; /* フォントサイズを少し小さく */
+            color: #64748b; /* テキスト色を調整 */
             line-height: 1.4;
             margin: 0;
+        }
+        
+        /* 背景色を追加 */
+        .section {
+            padding: 40px 20px;
+            background: #f8f9fa; /* 薄いグレーの背景 */
+        }
+        
+        /* イベント情報セクションの背景色調整 */
+        .media-section {
+            padding: 40px 20px;
+            background: #ffffff; /* 白背景に変更 */
         }
         
         .map-box {
@@ -341,6 +370,12 @@
             color: #666;
             margin-bottom: 15px;
             font-size: 0.9rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr); /* タブレットでは3列 */
+            }
         }
         
         @media (max-width: 768px) {
