@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第11回 おおさか鉄道模型バザール</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            color: #333;
+        }
+        
+        .navbar {
+            background: #15803d;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-sizing: border-box;
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        
+        .hero {
+            background: #16a34a;
+            color: white;
+            padding: 80px 20px 40px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
+            margin: 0 0 30px;
+        }
+        
+        .hero-info {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .hero-info-item {
+            margin: 0;
+        }
+        
+        .hero-info-item h3 {
+            margin-bottom: 4px;
+            font-size: 1rem;
+            color: white;
+        }
+        
+        .hero-info-item p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+        
+        .section {
+            padding: 30px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            color: #15803d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        /* ポスター・マップセクション */
+        .media-section {
+            padding: 40px 20px;
+            background: #f8f8f8;
+        }
+        
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .media-item {
+            text-align: center;
+        }
+        
+        .media-item h3 {
+            color: #15803d;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .media-thumbnail {
+            cursor: pointer;
+            transition: transform 0.2s;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .media-thumbnail:hover {
+            transform: scale(1.02);
+        }
+        
+        .media-thumbnail img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* モーダル */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 20px;
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .modal-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #16a34a;
+        }
+        
+        .download-btn {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #16a34a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .download-btn:hover {
+            background-color: #15803d;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .exhibitor {
+            background: #f8f8f8;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .exhibitor-img {
+            width: 100%;
+            padding-top: 100%; /* 1:1 アスペクト比 */
+            background: #ddd;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .exhibitor-img-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .exhibitor-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .new-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ef4444;
+            color: white;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .osaka-badge {
+            background: #2563eb;
+        }
+        
+        .exhibitor-info {
+            padding: 12px;
+        }
+        
+        .exhibitor-info h3 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        
+        .exhibitor-info p {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.4;
+            margin: 0;
+        }
+        
+        .map-box {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .map-box h3 {
+            margin-bottom: 8px;
+        }
+        
+        .map-box p {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .map {
+            width: 100%;
+            height: 350px;
+            background: #ddd;
+            margin-top: 10px;
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .exhibitors-note {
+            text-align: center;
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 15px 30px;
+            }
+            
+            .hero h1 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+            
+            .hero-info {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .hero-info-item {
+                padding: 6px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.2);
+            }
+            
+            .hero-info-item:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+            
+            .hero-info-item h3 {
+                font-size: 0.9rem;
+                margin-bottom: 2px;
+            }
+            
+            .hero-info-item p {
+                font-size: 0.85rem;
+                line-height: 1.3;
+            }
+            
+            .section {
+                padding: 20px 15px;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+            
+            .media-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .exhibitor {
+                display: flex;
+                align-items: center;
+                height: 100px;
+            }
+            
+            .exhibitor-img {
+                width: 100px;
+                height: 100px;
+                padding-top: 0;
+                flex-shrink: 0;
+            }
+            
+            .exhibitor-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 10px;
+                height: 100%;
+            }
+            
+            .exhibitor-info h3 {
+                font-size: 0.95rem;
+                margin-bottom: 2px;
+            }
+            
+            .exhibitor-info p {
+                font-size: 0.8rem;
+                line-height: 1.3;
+            }
+            
+            .new-badge {
+                top: 5px;
+                right: 5px;
+                padding: 2px 5px;
+                font-size: 0.65rem;
+            }
+            
+            .map {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html">鉄道模型バザール</a>
+            <a href="index.html">← トップに戻る</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <h1>第11回 おおさか鉄道模型バザール</h1>
+        <div class="hero-info">
+            <div class="hero-info-item">
+                <h3>開催日時</h3>
+                <p>2025年6月14日(土) 10:00〜17:00<br>
+                2025年6月15日(日) 10:00〜16:00</p>
+            </div>
+            <div class="hero-info-item">
+                <h3>会場</h3>
+                <p>梅田アクトスリーホール</p>
+            </div>
+            <div class="hero-info-item">
+                <h3>入場料</h3>
+                <p>無料</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ポスター・会場マップセクション -->
+    <section class="media-section">
+        <div class="container">
+            <h2>イベント情報</h2>
+            <div class="media-grid">
+                <div class="media-item">
+                    <h3>イベントポスター</h3>
+                    <div class="media-thumbnail" onclick="openModal('poster')">
+                        <img src="https://via.placeholder.com/400x600/16a34a/ffffff?text=イベントポスター" alt="第11回おおさか鉄道模型バザール ポスター">
+                    </div>
+                </div>
+                <div class="media-item">
+                    <h3>会場マップ</h3>
+                    <div class="media-thumbnail" onclick="openModal('map')">
+                        <img src="https://via.placeholder.com/400x400/15803d/ffffff?text=会場マップ" alt="会場マップ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- モーダル -->
+    <div id="imageModal" class="modal" onclick="closeModal(event)">
+        <span class="close" onclick="closeModal(event)">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
+            <a id="downloadBtn" class="download-btn" download>画像を保存</a>
+        </div>
+    </div>
+    
+    <section class="section">
+        <div class="container">
+            <h2>出展社一覧</h2>
+            <p class="exhibitors-note">※順番通りに表示しています</p>
+            
+            <div class="grid-3">
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>あおぞら電車</h3>
+                        <p>鉄道模型の新製品から中古品まで幅広く取り扱い。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>アルモデル</h3>
+                        <p>金属製車両キットの専門店。精密な作りが特徴。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>ＩＯＲＩ工房</h3>
+                        <p>オリジナルパーツと改造用品を多数展示販売。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>イケダモデリング</h3>
+                        <p>精密な車両モデルと改造パーツの専門店。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <span class="new-badge">初参加</span>
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>エッグ工房</h3>
+                        <p>独創的なジオラマ用アクセサリーを製作販売。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>エヌ小屋</h3>
+                        <p>鉄道模型パーツ専門店。細かなディテールアップパーツ。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>Nshell</h3>
+                        <p>3Dプリント製品を中心に最新技術の模型を展示。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <span class="new-badge">初参加</span>
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>株式会社　カツミ</h3>
+                        <p>老舗鉄道模型メーカー。HOゲージの名車を展示即売。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>株式会社　カトー</h3>
+                        <p>国内最大手の鉄道模型メーカー。新製品を多数展示。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>KATO京都駅店</h3>
+                        <p>京都駅直結の店舗から特選商品を出品。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>紀州鉄道株式会社</h3>
+                        <p>実物鉄道会社のオリジナルグッズや模型を販売。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <span class="new-badge">初参加</span>
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>キハ工房</h3>
+                        <p>気動車専門の改造パーツとオリジナル製品。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>黒木製作所【わき役黒ちゃん】</h3>
+                        <p>機関車・貨車を中心とした車両と関連商品。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <span class="new-badge">初参加</span>
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>京神模型</h3>
+                        <p>京都・神戸エリアの鉄道模型専門店。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>甲府モデル</h3>
+                        <p>中央線関連の車両や情景用品を中心に展開。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>工房さくら鉄道</h3>
+                        <p>桜をモチーフにしたジオラマ用品と情景小物。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>コリン堂</h3>
+                        <p>輸入鉄道模型と海外メーカー製品を多数取り扱い。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>ジオラマ工房Ｙ．Ｎ．</h3>
+                        <p>完成ジオラマと製作技法の実演販売。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>SHIGEMON SHOP</h3>
+                        <p>オリジナル車両と限定品を多数取り揃え。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <span class="new-badge">初参加</span>
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>株式会社　津川洋行</h3>
+                        <p>建物模型やストラクチャーの老舗メーカー。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <span class="new-badge">初参加</span>
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>鉄道模型道場</h3>
+                        <p>初心者から上級者まで楽しめる模型と技術指導。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>トーマモデルワークス</h3>
+                        <p>精密な車両モデルとカスタムパーツ。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>トラムウェイ</h3>
+                        <p>路面電車と都市型鉄道の専門ブランド。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>トレジャータウン</h3>
+                        <p>レアな中古品と掘り出し物が見つかる専門店。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <span class="new-badge">初参加</span>
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>ノエルコーポレーション</h3>
+                        <p>欧州型鉄道模型と輸入品の専門商社。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>梅桜堂</h3>
+                        <p>和風建築物と日本の情景用品専門店。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>フジドリームスタジオ５０１</h3>
+                        <p>オリジナルデカールと塗装済み完成品を展示。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>プレイテクノス</h3>
+                        <p>鉄道模型用電子機器とコントローラー。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>株式会社　朗堂</h3>
+                        <p>書籍・DVD・資料類を中心に鉄道関連商品を販売。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>ホビーショップタムタム</h3>
+                        <p>総合模型店ならではの豊富な品揃え。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>みやこ模型</h3>
+                        <p>京都から出展。関西私鉄車両を中心に展開。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>模型工房パーミル</h3>
+                        <p>オーダーメイド車両と精密改造の専門工房。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>模型の丸屋</h3>
+                        <p>老舗模型店。新旧問わず幅広い商品を取り扱い。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>MODEL工房P-6</h3>
+                        <p>オリジナル車両と改造キットの専門工房。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <span class="new-badge">初参加</span>
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>ヨシカワ第一工廠</h3>
+                        <p>工場直送の新製品と限定品を特別価格で提供。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>ヨミテックス</h3>
+                        <p>照明システムと電飾パーツの専門メーカー。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor">
+                    <div class="exhibitor-img">
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>レイルクラッシック</h3>
+                        <p>ヴィンテージ鉄道模型と往年の名車を展示販売。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" style="background: #f8f8f8;">
+        <div class="container">
+            <h2>アクセス</h2>
+            <div class="map-box">
+                <h3>梅田アクトスリーホール</h3>
+                <p>〒530-0001 大阪府大阪市北区梅田1-8-17 大阪第一生命ビル17F<br>
+                JR「大阪」駅より徒歩5分<br>
+                各線「梅田」駅より徒歩3分<br>
+                ※駐車場はございません。公共交通機関をご利用ください。</p>
+                
+                <div class="map">
+                    <!-- Googleマップ埋め込み位置 -->
+                </div>
+                
+                <p style="font-size: 0.8rem; color: #666; margin-top: 10px; text-align: left;">
+                    ※会場への本イベントに関するお問い合わせはご遠慮ください。イベントに関してのご質問やご意見はお問い合わせフォームよりお願いします。
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <p>&copy; 2025 鉄道模型バザール実行委員会. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // モーダル機能
+        function openModal(type) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            if (type === 'poster') {
+                modalImg.src = 'https://via.placeholder.com/800x1200/16a34a/ffffff?text=イベントポスター（フルサイズ）';
+                modalImg.alt = '第11回おおさか鉄道模型バザール ポスター';
+                downloadBtn.href = modalImg.src;
+                downloadBtn.download = 'osaka_railway_bazaar_poster.jpg';
+            } else if (type === 'map') {
+                modalImg.src = 'https://via.placeholder.com/1000x1000/15803d/ffffff?text=会場マップ（フルサイズ）';
+                modalImg.alt = '会場マップ';
+                downloadBtn.href = modalImg.src;
+                downloadBtn.download = 'osaka_railway_bazaar_map.jpg';
+            }
+            
+            modal.style.display = 'block';
+        }
+        
+        function closeModal(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal || event.target.classList.contains('close')) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // ESCキーでモーダルを閉じる
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.getElementById('imageModal').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
