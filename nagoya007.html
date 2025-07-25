@@ -19,6 +19,7 @@
             width: 100%;
             top: 0;
             z-index: 100;
+            box-sizing: border-box;
         }
         
         .nav-content {
@@ -27,11 +28,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 20px;
         }
         
         .navbar a {
             color: white;
             text-decoration: none;
+            white-space: nowrap;
         }
         
         .hero {
@@ -249,8 +252,18 @@
         
         .exhibitor-img {
             width: 100%;
-            height: 200px;
+            padding-top: 100%; /* 1:1 アスペクト比 */
             background: #ddd;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .exhibitor-img-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -274,6 +287,7 @@
             border-radius: 4px;
             font-size: 0.7rem;
             font-weight: bold;
+            z-index: 10;
         }
         
         .nagoya-badge {
@@ -396,6 +410,7 @@
             .exhibitor-img {
                 width: 100px;
                 height: 100px;
+                padding-top: 0;
                 flex-shrink: 0;
             }
             
@@ -495,7 +510,9 @@
             <div class="grid-3">
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>あおぞら電車</h3>
@@ -505,7 +522,9 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>アルモデル</h3>
@@ -515,7 +534,9 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>ＩＯＲＩ工房</h3>
@@ -525,8 +546,10 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
                         <span class="new-badge nagoya-badge">名古屋初</span>
+                        <div class="exhibitor-img-content">
+                            画像準備中
+                        </div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>エッグ工房</h3>
