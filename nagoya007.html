@@ -5,26 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>第7回 ナゴヤ鉄道模型バザール</title>
     
-    <!-- ファビコン設定 -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: sans-serif;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
+            line-height: 1.6;
             color: #333;
         }
         
+        /* ナビゲーション */
         .navbar {
-            background: #1e3a8a;
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
             color: white;
-            padding: 20px;
+            padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 100;
-            box-sizing: border-box;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
         .nav-content {
@@ -33,54 +36,107 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 2rem;
         }
         
         .navbar a {
             color: white;
             text-decoration: none;
             white-space: nowrap;
+            font-weight: 500;
+            transition: opacity 0.3s;
         }
         
+        .navbar a:hover {
+            opacity: 0.8;
+        }
+        
+        /* ヒーローセクション */
         .hero {
-            background: #ea580c;
+            background: linear-gradient(135deg, #dc2626, #ea580c);
             color: white;
-            padding: 80px 20px 40px;
+            padding: 40px 20px 30px;
             text-align: center;
             margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 50%);
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
         }
         
         .hero h1 {
-            font-size: 2rem;
-            margin: 0 0 30px;
+            font-size: 2.5rem;
+            margin: 0 0 20px;
+            font-weight: 900;
+            letter-spacing: 0.02em;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(to right, #ffffff, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .hero-info {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 30px;
+            position: relative;
+            z-index: 1;
         }
         
         .hero-info-item {
-            margin: 0;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s, background 0.3s;
+        }
+        
+        .hero-info-item:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.15);
         }
         
         .hero-info-item h3 {
-            margin-bottom: 4px;
-            font-size: 1rem;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
             color: white;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
         .hero-info-item p {
-            font-size: 0.9rem;
+            font-size: 1rem;
             line-height: 1.4;
             margin: 0;
+            font-weight: 600;
         }
         
+        /* セクション共通 */
         .section {
-            padding: 30px 20px;
+            padding: 60px 20px;
         }
         
         .container {
@@ -91,46 +147,13 @@
         h2 {
             color: #1e3a8a;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            font-weight: 700;
         }
         
-        .info-box {
-            background: #ea580c;
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
-        }
-        
-        .info-box h2 {
-            margin-bottom: 12px;
-        }
-        
-        .info-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        
-        .info-item {
-            margin: 0;
-        }
-        
-        .info-item h3 {
-            margin-bottom: 4px;
-            font-size: 1rem;
-        }
-        
-        .info-item p {
-            font-size: 0.9rem;
-            line-height: 1.4;
-            margin: 0;
-        }
-        
-        /* ポスター・マップセクション */
+        /* イベント情報セクション */
         .media-section {
-            padding: 40px 20px;
             background: #f8f8f8;
         }
         
@@ -148,27 +171,40 @@
         
         .media-thumbnail {
             cursor: pointer;
-            transition: transform 0.2s;
-            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background: #f5f5f5;
+            aspect-ratio: 3/4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .media-thumbnail:hover {
-            transform: scale(1.02);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
         }
         
         .media-thumbnail img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
+        }
+        
+        .media-placeholder {
+            padding: 20px;
+            color: #999;
+            font-size: 0.9rem;
         }
         
         /* モーダル */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 2000;
             left: 0;
             top: 0;
             width: 100%;
@@ -208,7 +244,8 @@
             font-size: 40px;
             font-weight: bold;
             cursor: pointer;
-            z-index: 1001;
+            z-index: 2001;
+            transition: color 0.3s;
         }
         
         .close:hover,
@@ -223,60 +260,64 @@
             transform: translateX(-50%);
             background-color: #ea580c;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
             text-decoration: none;
             display: inline-block;
+            transition: background-color 0.3s;
+            font-weight: 500;
         }
         
         .download-btn:hover {
             background-color: #dc2626;
         }
         
-        .grid-3 {
+        /* 出展社セクション */
+        .exhibitors-section {
+            background: #f8f9fa;
+        }
+        
+        .exhibitors-note {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+        
+        .exhibitors-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 3列から4列に変更 */
-            gap: 20px; /* 間隔を少し広げる */
-            max-width: 1200px; /* 最大幅を設定 */
-            margin: 0 auto; /* 中央寄せ */
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .exhibitor {
-            background: #ffffff; /* 白背景を明確に */
-            border-radius: 12px; /* 角丸を少し大きく */
+            background: #ffffff;
+            border-radius: 12px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 影を追加 */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             transition: transform 0.3s, box-shadow 0.3s;
         }
         
         .exhibitor:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
         }
         
         .exhibitor-img {
             width: 100%;
-            padding-top: 100%; /* 1:1 アスペクト比 */
+            height: 200px;
             position: relative;
             overflow: hidden;
-            background-size: cover !important;
-            background-position: center !important;
-            background-repeat: no-repeat !important;
-        }
-        
-        .exhibitor-img-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            font-size: 0;
-            color: transparent;
-            display: none; /* 完全に非表示にする */
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .exhibitor-img img {
@@ -286,18 +327,29 @@
             display: block;
         }
         
+        .exhibitor-img-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e5e7eb 0%, #f3f4f6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+        
         .new-badge {
             position: absolute;
             top: 8px;
             right: 8px;
             background: #ef4444;
             color: white;
-            padding: 4px 8px; /* パディングを少し増やす */
+            padding: 4px 10px;
             border-radius: 4px;
             font-size: 0.7rem;
             font-weight: bold;
             z-index: 10;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* 影を追加 */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         .nagoya-badge {
@@ -305,87 +357,110 @@
         }
         
         .exhibitor-info {
-            padding: 15px; /* パディングを統一 */
-            background: #ffffff; /* 背景色を明確に */
+            padding: 15px;
         }
         
         .exhibitor-info h3 {
-            font-size: 0.95rem; /* フォントサイズを少し小さく */
+            font-size: 0.95rem;
             margin-bottom: 6px;
-            color: #1e3a8a; /* タイトルに色を追加 */
+            color: #1e3a8a;
             font-weight: 600;
         }
         
         .exhibitor-info p {
-            font-size: 0.8rem; /* フォントサイズを少し小さく */
-            color: #64748b; /* テキスト色を調整 */
+            font-size: 0.8rem;
+            color: #64748b;
             line-height: 1.4;
             margin: 0;
         }
         
-        /* 背景色を追加 */
-        .section {
-            padding: 40px 20px;
-            background: #f8f9fa; /* 薄いグレーの背景 */
-        }
-        
-        /* イベント情報セクションの背景色調整 */
-        .media-section {
-            padding: 40px 20px;
-            background: #ffffff; /* 白背景に変更 */
+        /* アクセスセクション */
+        .access-section {
+            background: #ffffff;
         }
         
         .map-box {
             background: #f0f0f0;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .map-box h3 {
-            margin-bottom: 8px;
+            margin-bottom: 15px;
+            color: #1e3a8a;
+            font-size: 1.4rem;
         }
         
         .map-box p {
-            margin-bottom: 8px;
-            font-size: 0.9rem;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
         
         .map {
             width: 100%;
             height: 350px;
             background: #ddd;
-            margin-top: 10px;
+            margin-top: 20px;
+            border-radius: 8px;
         }
         
+        .map-note {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 15px;
+            text-align: left;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #1e3a8a;
+        }
+        
+        /* フッター */
         .footer {
-            background: #333;
+            background: #1f2937;
             color: white;
             text-align: center;
-            padding: 15px;
-        }
-        
-        .exhibitors-note {
-            text-align: center;
-            color: #666;
-            margin-bottom: 15px;
+            padding: 20px;
             font-size: 0.9rem;
         }
         
+        /* レスポンシブ対応 */
         @media (max-width: 1024px) {
-            .grid-3 {
-                grid-template-columns: repeat(3, 1fr); /* タブレットでは3列 */
+            .exhibitors-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
             }
         }
         
         @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 0;
+            }
+            
+            .nav-content {
+                padding: 0 1rem;
+            }
+
             .hero {
-                padding: 60px 15px 30px;
+                padding: 30px 15px 25px;
+                margin-top: 60px;
             }
             
             .hero h1 {
-                font-size: 1.5rem;
-                margin-bottom: 20px;
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+                background: white;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
             }
             
             .hero-info {
@@ -393,33 +468,13 @@
                 gap: 10px;
             }
             
-            .hero-info-item {
-                padding: 6px 0;
-                border-bottom: 1px solid rgba(255,255,255,0.2);
-            }
-            
-            .hero-info-item:last-child {
-                border-bottom: none;
-                padding-bottom: 0;
-            }
-            
-            .hero-info-item h3 {
-                font-size: 0.9rem;
-                margin-bottom: 2px;
-            }
-            
-            .hero-info-item p {
-                font-size: 0.85rem;
-                line-height: 1.3;
-            }
-            
             .section {
-                padding: 20px 15px;
+                padding: 40px 15px;
             }
             
             h2 {
-                font-size: 1.5rem;
-                margin-bottom: 15px;
+                font-size: 1.6rem;
+                margin-bottom: 25px;
             }
             
             .media-grid {
@@ -427,7 +482,7 @@
                 gap: 20px;
             }
             
-            .grid-3 {
+            .exhibitors-grid {
                 grid-template-columns: 1fr;
                 gap: 12px;
             }
@@ -441,37 +496,42 @@
             .exhibitor-img {
                 width: 100px;
                 height: 100px;
-                padding-top: 0;
                 flex-shrink: 0;
             }
             
             .exhibitor-info {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
+                flex: 1;
                 padding: 10px;
-                height: 100%;
             }
             
-            .exhibitor-info h3 {
-                font-size: 0.95rem;
-                margin-bottom: 2px;
-            }
-            
-            .exhibitor-info p {
-                font-size: 0.8rem;
-                line-height: 1.3;
-            }
-            
-            .new-badge {
-                top: 5px;
-                right: 5px;
-                padding: 2px 5px;
-                font-size: 0.65rem;
+            .map-box {
+                padding: 20px;
             }
             
             .map {
                 height: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                padding: 25px 10px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero-info-item {
+                padding: 10px;
+            }
+            
+            .hero-info-item h3 {
+                font-size: 0.75rem;
+            }
+            
+            .hero-info-item p {
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -503,24 +563,24 @@
         </div>
     </section>
     
-    <!-- ポスター・会場マップセクション -->
-    <section class="media-section">
+    <!-- イベント情報セクション -->
+    <section class="section media-section">
         <div class="container">
             <h2>イベント情報</h2>
             <div class="media-grid">
                 <div class="media-item">
                     <div class="media-thumbnail" onclick="openModal('poster')">
-                        <img src="images/nagoya-poster-007.jpg" alt="第7回ナゴヤ鉄道模型バザール ポスター">
+                        <img src="images/nagoya-poster-007.jpg" alt="第7回ナゴヤ鉄道模型バザール ポスター" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'media-placeholder\'>ポスター<br>画像準備中</div>';">
                     </div>
                 </div>
                 <div class="media-item">
                     <div class="media-thumbnail" onclick="openModal('map')">
-                        <img src="images/nagoya-map-007.jpg" alt="会場マップ">
+                        <img src="images/nagoya-map-007.jpg" alt="会場マップ" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'media-placeholder\'>会場マップ<br>画像準備中</div>';">
                     </div>
                 </div>
                 <div class="media-item">
                     <div class="media-thumbnail" onclick="openModal('photo')">
-                        <img src="images/nagoya-photo-007.jpg" alt="集合写真">
+                        <img src="images/nagoya-photo-007.jpg" alt="集合写真" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'media-placeholder\'>集合写真<br>画像準備中</div>';">
                     </div>
                 </div>
             </div>
@@ -536,17 +596,16 @@
         </div>
     </div>
     
-    <section class="section">
+    <!-- 出展社一覧セクション -->
+    <section class="section exhibitors-section">
         <div class="container">
             <h2>出展社一覧</h2>
             <p class="exhibitors-note">※五十音順で表示しています</p>
             
-            <div class="grid-3">
+            <div class="exhibitors-grid">
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            画像準備中
-                        </div>
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>あおぞら電車</h3>
@@ -556,9 +615,7 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            画像準備中
-                        </div>
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>アルモデル</h3>
@@ -568,9 +625,7 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        <div class="exhibitor-img-content">
-                            画像準備中
-                        </div>
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>ＩＯＲＩ工房</h3>
@@ -579,11 +634,9 @@
                 </div>
                 
                 <div class="exhibitor">
+                    <span class="new-badge nagoya-badge">名古屋初</span>
                     <div class="exhibitor-img">
-                        <span class="new-badge nagoya-badge">名古屋初</span>
-                        <div class="exhibitor-img-content">
-                            画像準備中
-                        </div>
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>エッグ工房</h3>
@@ -593,7 +646,7 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>エヌ小屋</h3>
@@ -603,7 +656,7 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>Nshell</h3>
@@ -612,9 +665,9 @@
                 </div>
                 
                 <div class="exhibitor">
+                    <span class="new-badge nagoya-badge">名古屋初</span>
                     <div class="exhibitor-img">
-                        画像準備中
-                        <span class="new-badge nagoya-badge">名古屋初</span>
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>株式会社　カツミ</h3>
@@ -624,7 +677,7 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>紀州鉄道株式会社</h3>
@@ -633,9 +686,9 @@
                 </div>
                 
                 <div class="exhibitor">
+                    <span class="new-badge nagoya-badge">名古屋初</span>
                     <div class="exhibitor-img">
-                        画像準備中
-                        <span class="new-badge nagoya-badge">名古屋初</span>
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>キハ工房</h3>
@@ -644,9 +697,9 @@
                 </div>
                 
                 <div class="exhibitor">
+                    <span class="new-badge">初出展</span>
                     <div class="exhibitor-img">
-                        画像準備中
-                        <span class="new-badge">初出展</span>
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>倶利伽羅車両製造</h3>
@@ -656,7 +709,7 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>甲府モデル</h3>
@@ -666,7 +719,7 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>工房さくら鉄道</h3>
@@ -676,7 +729,7 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>コリン堂</h3>
@@ -685,9 +738,9 @@
                 </div>
                 
                 <div class="exhibitor">
+                    <span class="new-badge">初出展</span>
                     <div class="exhibitor-img">
-                        画像準備中
-                        <span class="new-badge">初出展</span>
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>SATech</h3>
@@ -697,7 +750,7 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>ジオラマ工房Ｙ．Ｎ．</h3>
@@ -706,9 +759,9 @@
                 </div>
                 
                 <div class="exhibitor">
+                    <span class="new-badge">初出展</span>
                     <div class="exhibitor-img">
-                        画像準備中
-                        <span class="new-badge">初出展</span>
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>世田谷総合車輌センター</h3>
@@ -718,7 +771,7 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>東京ジオラマファクトリー</h3>
@@ -727,9 +780,9 @@
                 </div>
                 
                 <div class="exhibitor">
+                    <span class="new-badge nagoya-badge">名古屋初</span>
                     <div class="exhibitor-img">
-                        画像準備中
-                        <span class="new-badge nagoya-badge">名古屋初</span>
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>トレジャータウン</h3>
@@ -738,9 +791,9 @@
                 </div>
                 
                 <div class="exhibitor">
+                    <span class="new-badge nagoya-badge">名古屋初</span>
                     <div class="exhibitor-img">
-                        画像準備中
-                        <span class="new-badge nagoya-badge">名古屋初</span>
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>フジドリームスタジオ501</h3>
@@ -750,7 +803,7 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>株式会社　朗堂</h3>
@@ -759,9 +812,9 @@
                 </div>
                 
                 <div class="exhibitor">
+                    <span class="new-badge">初出展</span>
                     <div class="exhibitor-img">
-                        画像準備中
-                        <span class="new-badge">初出展</span>
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>Pochi。工房</h3>
@@ -771,7 +824,7 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>みやこ模型</h3>
@@ -780,9 +833,9 @@
                 </div>
                 
                 <div class="exhibitor">
+                    <span class="new-badge nagoya-badge">名古屋初</span>
                     <div class="exhibitor-img">
-                        画像準備中
-                        <span class="new-badge nagoya-badge">名古屋初</span>
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>ヨシカワ第一工廠</h3>
@@ -792,7 +845,7 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>ヨミテックス</h3>
@@ -802,18 +855,18 @@
                 
                 <div class="exhibitor">
                     <div class="exhibitor-img">
-                        画像準備中
+                        <div class="exhibitor-img-placeholder">画像準備中</div>
                     </div>
                     <div class="exhibitor-info">
                         <h3>わき役黒ちゃん</h3>
-                        <p>機関車・貨車を中心とした車両と関連商品。</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     
-    <section class="section" style="background: #f8f8f8;">
+    <!-- アクセスセクション -->
+    <section class="section access-section">
         <div class="container">
             <h2>アクセス</h2>
             <div class="map-box">
@@ -826,9 +879,10 @@
                     <!-- Googleマップ埋め込み位置 -->
                 </div>
                 
-                <p style="font-size: 0.8rem; color: #666; margin-top: 10px; text-align: left;">
-                    ※会場への本イベントに関するお問い合わせはご遠慮ください。イベントに関してのご質問やご意見はお問い合わせフォームよりお願いします。
-                </p>
+                <div class="map-note">
+                    ※会場への本イベントに関するお問い合わせはご遠慮ください。<br>
+                    イベントに関してのご質問やご意見はお問い合わせフォームよりお願いします。
+                </div>
             </div>
         </div>
     </section>
