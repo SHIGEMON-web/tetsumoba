@@ -29,8 +29,6 @@
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             height: 60px; /* 固定高さを設定 */
-            display: flex;
-            align-items: center;
         }
         
         .nav-content {
@@ -40,6 +38,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 2rem;
+            height: 100%;
         }
         
         .navbar a {
@@ -454,6 +453,7 @@
         @media (max-width: 768px) {
             .navbar {
                 padding: 0.8rem 0;
+                height: 50px; /* スマホ用の高さ */
             }
             
             .nav-content {
