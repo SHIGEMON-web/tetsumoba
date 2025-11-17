@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第12回 おおさか鉄道模型バザール</title>
+    
+    <!-- ファビコン設定 -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* ナビゲーション */
+        .navbar {
+            background: linear-gradient(135deg, #15803d, #16a34a);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: 60px; /* 固定高さを設定 */
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 100%;
+        }
+        
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            white-space: nowrap;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .navbar a:hover {
+            opacity: 0.8;
+        }
+        
+        /* ヒーローセクション */
+        .hero {
+            background: linear-gradient(135deg, #15803d, #16a34a);
+            color: white;
+            padding: 80px 20px 30px;
+            padding-top: calc(60px + 40px); /* ナビバーの高さ + 余白 */
+            text-align: center;
+            margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin: 0 0 20px;
+            font-weight: 900;
+            letter-spacing: 0.02em;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-info {
+            max-width: 700px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-info-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s, background 0.3s;
+        }
+        
+        .hero-info-item:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .hero-info-item h3 {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: white;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero-info-item p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .hero-info-item .date {
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .hero-info-item .time {
+            display: block;
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+        
+        .hero-info-item p.small {
+            font-size: 0.95rem;
+            margin-top: 8px;
+            opacity: 0.95;
+        }
+        
+        /* セクション共通 */
+        .section {
+            padding: 60px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            color: #15803d;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        /* イベント情報セクション */
+        .media-section {
+            background: #ffffff;
+        }
+        
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .media-item {
+            text-align: center;
+        }
+        
+        .media-thumbnail {
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background: #f5f5f5;
+            aspect-ratio: 3/4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .media-thumbnail:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .media-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .media-placeholder {
+            color: #999;
+            font-size: 1.2rem;
+            padding: 20px;
+        }
+        
+        .media-item p {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        /* イベント内容セクション */
+        .content-section {
+            background: #f8f9fa;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .content-item {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .content-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        
+        .content-item h3 {
+            color: #15803d;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .content-item p {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .content-item ul {
+            list-style-position: inside;
+            color: #555;
+            margin-top: 10px;
+        }
+        
+        .content-item li {
+            margin-bottom: 8px;
+        }
+        
+        /* 出展者セクション */
+        .exhibitors-section {
+            background: #ffffff;
+        }
+        
+        .exhibitors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .exhibitor {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            height: 100%;
+        }
+        
+        .exhibitor:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            border-color: #15803d;
+        }
+        
+        .new-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4444;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .exhibitor-img {
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .exhibitor-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .exhibitor-img-placeholder {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .exhibitor-info {
+            padding: 20px;
+        }
+        
+        .exhibitor-info h3 {
+            color: #15803d;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .exhibitor-info p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        /* アクセスセクション */
+        .access-section {
+            background: #f8f9fa;
+        }
+        
+        .map-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .map-box h3 {
+            color: #15803d;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .map-box p {
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .map {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .map-note {
+            background: #fff9e6;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ffc107;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #856404;
+        }
+        
+        /* フッター */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .footer p {
+            margin: 0;
+        }
+        
+        /* モーダル */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 8px;
+        }
+        
+        .close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+        
+        .download-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: #15803d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .download-btn:hover {
+            background: #0f5929;
+        }
+        
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-info {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .exhibitors-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .map {
+                height: 300px;
+            }
+            
+            .nav-content {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ナビゲーション -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#home">おおさか鉄道模型バザール</a>
+            <a href="#media">イベント情報</a>
+            <a href="#exhibitors">出展者一覧</a>
+            <a href="#access">アクセス</a>
+        </div>
+    </nav>
+    
+    <!-- ヒーローセクション -->
+    <section id="home" class="hero">
+        <h1>第12回 おおさか鉄道模型バザール</h1>
+        <div class="hero-info">
+            <div class="hero-info-item">
+                <h3>開催日時</h3>
+                <p>
+                    <span class="date">2026年1月10日（土）</span>
+                    <span class="time">10:00～17:00</span>
+                    <span class="date">2026年1月11日（日）</span>
+                    <span class="time">10:00～15:00</span>
+                </p>
+            </div>
+            <div class="hero-info-item">
+                <h3>会場</h3>
+                <p>梅田アクト・スリーホール<br>
+                <span class="small">大阪市北区堂山町15-17</span></p>
+            </div>
+            <div class="hero-info-item">
+                <h3>入場料</h3>
+                <p>無料</p>
+            </div>
+            <div class="hero-info-item">
+                <h3>主催</h3>
+                <p>鉄道模型バザール実行委員会</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- イベント情報セクション -->
+    <section id="media" class="section media-section">
+        <div class="container">
+            <h2>イベント情報</h2>
+            <div class="media-grid">
+                <div class="media-item">
+                    <div class="media-thumbnail" onclick="openModal('poster')">
+                        <img src="images/osaka-poster-012.jpg" alt="第12回おおさか鉄道模型バザール ポスター" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'media-placeholder\'>ポスター画像<br>準備中</div>';">
+                    </div>
+                    <p>イベントポスター</p>
+                </div>
+                <div class="media-item">
+                    <div class="media-thumbnail" onclick="openModal('map')">
+                        <img src="images/osaka-map-012.jpg" alt="会場マップ" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'media-placeholder\'>会場マップ<br>準備中</div>';">
+                    </div>
+                    <p>会場マップ</p>
+                </div>
+                <div class="media-item">
+                    <div class="media-thumbnail" onclick="openModal('photo')">
+                        <img src="images/osaka-photo-012.jpg" alt="集合写真" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'media-placeholder\'>集合写真<br>準備中</div>';">
+                    </div>
+                    <p>集合写真</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- モーダル -->
+    <div id="imageModal" class="modal" onclick="closeModal(event)">
+        <span class="close" onclick="closeModal(event)">&times;</span>
+        <img class="modal-content" id="modalImage" alt="">
+        <a id="downloadBtn" class="download-btn" download>画像をダウンロード</a>
+    </div>
+    
+    <!-- イベント内容セクション -->
+    <section class="section content-section">
+        <div class="container">
+            <h2>イベント内容</h2>
+            <div class="content-grid">
+                <div class="content-item">
+                    <h3>人気の鉄道模型メーカーによる販売会</h3>
+                    <p>国内外の人気鉄道模型メーカーが一堂に会し、新製品から限定品まで幅広く展示販売。各メーカーのスタッフと直接話せる貴重な機会です。</p>
+                </div>
+                <div class="content-item">
+                    <h3>鉄道模型レイアウト展示</h3>
+                    <p>精巧に作られた大型レイアウトや、個性豊かなモジュールレイアウトを多数展示。実際の運転シーンを間近でご覧いただけます。</p>
+                </div>
+                <div class="content-item">
+                    <h3>学びながら作る！ジオラマ製作体験！</h3>
+                    <p>初心者でも楽しめるジオラマ製作体験コーナーを開設。専門スタッフが丁寧に指導しますので、お子様から大人まで安心してご参加いただけます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 出展者一覧セクション -->
+    <section id="exhibitors" class="section exhibitors-section">
+        <div class="container">
+            <h2>出展者一覧</h2>
+            <div class="exhibitors-grid">
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/aozora-densha.jpg" alt="あおぞら電車" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>あおぞら電車</h3>
+                        <p>2014年創業の鉄道模型ガレージメーカーです。小型レイアウトにぴったりな電車・気動車キットを中心に製品化しております。イベントならではの実物をご覧いただき、ぜひこの世界を体験してみてください。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/akomo-kaizousha.jpg" alt="アコモ改造舎" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>アコモ改造舎</h3>
+                        <p>レーザー加工を駆使した製品を販売！車両キットやストラクチャーも。</p>
+                    </div>
+                </div>
+                
+                <a href="https://arumodel.co.jp/" target="_blank" class="exhibitor">
+                    <div class="exhibitor-img">
+                        <img src="images/aru-model.jpg" alt="アルモデル" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>アルモデル</h3>
+                        <p>作って楽しい金属製鉄道模型車両の組立キットを売ってます。</p>
+                    </div>
+                </a>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/iori-kobo.jpg" alt="ＩＯＲＩ工房" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>ＩＯＲＩ工房</h3>
+                        <p>レーザーカットしたペーパーキットで古典車を中心に製品を作っています。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/ikeda-modeling.jpg" alt="イケダモデリング" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>イケダモデリング</h3>
+                        <p>3Dプリントを活用した鉄道模型完成品・キット・ジオラマ素材を販売いたします</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/egg-kobo.jpg" alt="エッグ工房" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>エッグ工房</h3>
+                        <p>HO鉄道模型は在庫品と加工品</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/n-koya.jpg" alt="エヌ小屋" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>エヌ小屋</h3>
+                        <p>オリジナル内装シートの既存製品・新商品の先行販売あります！！</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/nshell.jpg" alt="Nshell" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>Nshell</h3>
+                        <p>100均で売っているA5サイズ、B5サイズのコンパクトなケースが車両ケースになる中敷きを販売しています。</p>
+                    </div>
+                </div>
+                
+                <a href="https://www.katsumi-modelshop.jp/" target="_blank" class="exhibitor">
+                    <div class="exhibitor-img">
+                        <img src="images/katsumi.jpg" alt="株式会社カツミ" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>株式会社カツミ</h3>
+                        <p>1/80真鍮製鉄道模型の製造メーカーです。</p>
+                    </div>
+                </a>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/kishu-railway.jpg" alt="紀州鉄道株式会社" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>紀州鉄道株式会社</h3>
+                        <p>唯一の鉄道事業者ディーラー！グッズや模型を販売！</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/kiha-kobo.jpg" alt="キハ工房" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>キハ工房</h3>
+                        <p>気動車や入替機のペーパーキットのほか、ジオラマに使えるペーパー製ストラクチャーなどを製作、販売しています。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/kurikara-sharyo.jpg" alt="倶利伽羅車両製造" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>倶利伽羅車両製造</h3>
+                        <p>レーザー測量をふくむ実車取材をベースに、実車の雰囲気を再現します！</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/kuroki-seisakusho.jpg" alt="黒木製作所(わき役黒ちゃん)" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>黒木製作所(わき役黒ちゃん)</h3>
+                        <p>レイアウトに必須なジオラマ用品などを販売</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/keishin-mokei.jpg" alt="京神模型" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>京神模型</h3>
+                        <p>インレタ・なかじき・車両ケース・3Dパーツなどを販売いたします。インレタB級品などを封入した「京神ガチャ」もご用意する予定です。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/kofu-model.jpg" alt="甲府モデル" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>甲府モデル</h3>
+                        <p>貨車を始めとし、客車、電車、機関車、パーツ、ストラクチャー類のペーパーキットをNスケール、1/80などのスケールで再現しております。みんな買ってね。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/korindo.jpg" alt="コリン堂" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>コリン堂</h3>
+                        <p>戦前の電車、客車を中心にペーパーキットを展開しています。古くてかっこいい鉄道車両が好きな方はぜひお越しください</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/tetsudo-mokei-dojo.jpg" alt="鉄道模型道場" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>鉄道模型道場</h3>
+                        <p>国電、気動車、山陽電車等の型紙、ペーパーキットを製作してます。更に新製品も企画しておりますので、よろしくお願いいたします。</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/tramway.jpg" alt="トラムウェイ" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>トラムウェイ</h3>
+                        <p>人気の製品を販売！</p>
+                    </div>
+                </div>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/treasure-town.jpg" alt="トレジャータウン" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>トレジャータウン</h3>
+                        <p>車両工作を楽しみたい方へ向けた楽しい商品をたくさんご用意して皆様のご来場をお待ちしております！</p>
+                    </div>
+                </div>
+                
+                <a href="https://www.baiodo.com/" target="_blank" class="exhibitor">
+                    <div class="exhibitor-img">
+                        <img src="images/baiodo.jpg" alt="梅桜堂" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>梅桜堂</h3>
+                        <p>昭和から平成、そして現代にも残る懐かしい町並みを再現するジオラマ製品を企画・販売しています。1/150、1/87～/80スケールのペーパーキットや3Dプリント製品をイベント限定価格でご提供。</p>
+                    </div>
+                </a>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    <div class="exhibitor-img">
+                        <img src="images/playtechnos.jpg" alt="プレイテクノス" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>プレイテクノス</h3>
+                        <p>日本型HO・16番模型専門の型紙工房・プレイテクノスと、3D部品のBS工房です。旧型国電の底なし沼に頭のてっぺんまで沈んだ店主２人がお待ちしております。</p>
+                    </div>
+                </div>
+                
+                <a href="http://www.hogaraka.co.jp/" target="_blank" class="exhibitor">
+                    <div class="exhibitor-img">
+                        <img src="images/rodo.jpg" alt="株式会社朗堂" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>株式会社朗堂</h3>
+                        <p>大人気のコンテナ製品や模型車両を販売！</p>
+                    </div>
+                </a>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/pochi-kobo.jpg" alt="Pochi。工房" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>Pochi。工房</h3>
+                        <p>3D出力のカプラーを始めとした小物系メインで扱っています。ストラクチャー系の個人的なストック品のフリマも行なう予定です。</p>
+                    </div>
+                </div>
+                
+                <a href="https://hs-tamtam.co.jp/" target="_blank" class="exhibitor">
+                    <div class="exhibitor-img">
+                        <img src="images/hobby-shop-tamtam.jpg" alt="ホビーショップタムタム" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>ホビーショップタムタム</h3>
+                        <p>Nゲージ用 車両収納PEフォーム・室内灯・コンテナ等をイベント会場特別価格で販売いたします。また、Ｎゲージ車両アウトレット品の販売も予定しております。皆様のご来場お待ちしております。</p>
+                    </div>
+                </a>
+                
+                <a href="https://www.miyakomokei.com/" target="_blank" class="exhibitor">
+                    <div class="exhibitor-img">
+                        <img src="images/miyako-model.jpg" alt="みやこ模型" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>みやこ模型</h3>
+                        <p>JR西日本の中間車点灯を再現する「3ポジションライト基板」、機関車を常点灯化するための基板など取りそろえております。また、ご相談も承ります。お気軽におたずねください。</p>
+                    </div>
+                </a>
+                
+                <a href="https://kyoto-maruya.com/" target="_blank" class="exhibitor">
+                    <div class="exhibitor-img">
+                        <img src="images/mokei-maruya.jpg" alt="模型の丸屋" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>模型の丸屋</h3>
+                        <p>他所は作らぬ模型製品</p>
+                    </div>
+                </a>
+                
+                <a href="http://model-kobou-p-6.com/" target="_blank" class="exhibitor">
+                    <div class="exhibitor-img">
+                        <img src="images/model-kobo-p6.jpg" alt="MODEL工房P-6" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>MODEL工房P-6</h3>
+                        <p>阪急新2300系8連組キット、阪急3300,5300系キットを予約受付中！</p>
+                    </div>
+                </a>
+                
+                <a href="https://x.com/YoshikawaFA" target="_blank" class="exhibitor">
+                    <div class="exhibitor-img">
+                        <img src="images/yoshikawa-factory.jpg" alt="ヨシカワ第一工廠" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>ヨシカワ第一工廠</h3>
+                        <p>台湾を中心とした海外車両などの3Dプリンター製キットを製作</p>
+                    </div>
+                </a>
+                
+                <a href="https://yomix.booth.pm/" target="_blank" class="exhibitor">
+                    <div class="exhibitor-img">
+                        <img src="images/yomitex.jpg" alt="ヨミテックス" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>ヨミテックス</h3>
+                        <p>入れると車両の表情が変わる「ヨミレンズ」を制作、販売しています。</p>
+                    </div>
+                </a>
+                
+                <a href="https://www.rcawaza.co.jp/" target="_blank" class="exhibitor">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/railcraft-awaza.jpg" alt="レールクラフト阿波座" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>レールクラフト阿波座</h3>
+                        <p>オリジナル製品や鉄道グッズを販売！</p>
+                    </div>
+                </a>
+                
+                <div class="exhibitor" style="cursor: default;">
+                    
+                    <div class="exhibitor-img">
+                        <img src="images/yn-kanri.jpg" alt="YN管理" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                    </div>
+                    <div class="exhibitor-info">
+                        <h3>YN管理</h3>
+                        <p>鉄道模型の車両ケースに使用するオリジナルウレタンを制作しています。従来品と違い各車に専用設計していますのでジャストフィット！！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- アクセスセクション -->
+    <section class="section access-section">
+        <div class="container">
+            <h2>アクセス</h2>
+            <div class="map-box">
+                <h3>梅田アクト・スリーホール</h3>
+                <p>〒530-0027 大阪市北区堂山町15-17<br>
+                JR「大阪」駅より徒歩5分<br>
+                各線「梅田」駅より徒歩3分<br>
+                ※駐車場はございません。公共交通機関をご利用ください。</p>
+                
+                <div class="map">
+                    <iframe src="https://maps.google.com/maps?q=大阪市北区堂山町15-17&t=&z=17&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                
+                <div class="map-note">
+                    ※会場への本イベントに関するお問い合わせはご遠慮ください。<br>
+                    イベントに関してのご質問やご意見はお問い合わせフォームよりお願いします。
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <p>&copy; 2025 鉄道模型バザール実行委員会. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // モーダル機能
+        function openModal(type) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            if (type === 'poster') {
+                modalImg.src = 'images/osaka-poster-012.jpg';
+                modalImg.alt = '第12回おおさか鉄道模型バザール ポスター';
+                downloadBtn.href = modalImg.src;
+                downloadBtn.download = 'osaka_railway_bazaar_poster.jpg';
+            } else if (type === 'map') {
+                modalImg.src = 'images/osaka-map-012.jpg';
+                modalImg.alt = '会場マップ';
+                downloadBtn.href = modalImg.src;
+                downloadBtn.download = 'osaka_railway_bazaar_map.jpg';
+            } else if (type === 'photo') {
+                modalImg.src = 'images/osaka-photo-012.jpg';
+                modalImg.alt = '集合写真';
+                downloadBtn.href = modalImg.src;
+                downloadBtn.download = 'osaka_railway_bazaar_photo.jpg';
+            }
+            
+            modal.style.display = 'block';
+        }
+        
+        function closeModal(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal || event.target.classList.contains('close')) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // ESCキーでモーダルを閉じる
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.getElementById('imageModal').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
