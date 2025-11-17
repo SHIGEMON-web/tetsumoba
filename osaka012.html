@@ -96,10 +96,10 @@
         }
         
         .hero-info {
-            max-width: 700px;
+            max-width: 1000px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             position: relative;
             z-index: 1;
@@ -179,7 +179,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         
@@ -552,9 +552,11 @@
             <div class="hero-info-item">
                 <h3>開催日時</h3>
                 <p>
-                    <span class="date">2026年1月10日（土）</span>
+                    <span class="date">2026年1月10日(土)</span>
                     <span class="time">10:00～17:00</span>
-                    <span class="date">2026年1月11日（日）</span>
+                </p>
+                <p>
+                    <span class="date">2026年1月11日(日)</span>
                     <span class="time">10:00～15:00</span>
                 </p>
             </div>
@@ -567,10 +569,7 @@
                 <h3>入場料</h3>
                 <p>無料</p>
             </div>
-            <div class="hero-info-item">
-                <h3>主催</h3>
-                <p>鉄道模型バザール実行委員会</p>
-            </div>
+
         </div>
     </section>
     
@@ -581,19 +580,19 @@
             <div class="media-grid">
                 <div class="media-item">
                     <div class="media-thumbnail" onclick="openModal('poster')">
-                        <img src="images/osaka-poster-012.jpg" alt="第12回おおさか鉄道模型バザール ポスター" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'media-placeholder\'>ポスター画像<br>準備中</div>';">
+                        <img src="./images/osaka-poster-012.jpg" alt="第12回おおさか鉄道模型バザール ポスター" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'media-placeholder\'>ポスター画像<br>準備中</div>';">
                     </div>
                     <p>イベントポスター</p>
                 </div>
                 <div class="media-item">
                     <div class="media-thumbnail" onclick="openModal('map')">
-                        <img src="images/osaka-map-012.jpg" alt="会場マップ" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'media-placeholder\'>会場マップ<br>準備中</div>';">
+                        <img src="./images/osaka-map-012.jpg" alt="会場マップ" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'media-placeholder\'>会場マップ<br>準備中</div>';">
                     </div>
                     <p>会場マップ</p>
                 </div>
                 <div class="media-item">
                     <div class="media-thumbnail" onclick="openModal('photo')">
-                        <img src="images/osaka-photo-012.jpg" alt="集合写真" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'media-placeholder\'>集合写真<br>準備中</div>';">
+                        <img src="./images/osaka-photo-012.jpg" alt="集合写真" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'media-placeholder\'>集合写真<br>準備中</div>';">
                     </div>
                     <p>集合写真</p>
                 </div>
@@ -637,7 +636,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/aozora-densha.jpg" alt="あおぞら電車" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/aozora-densha.jpg" alt="あおぞら電車" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>あおぞら電車</h3>
@@ -648,7 +647,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/akomo-kaizousha.jpg" alt="アコモ改造舎" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/akomo-kaizousha.jpg" alt="アコモ改造舎" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>アコモ改造舎</h3>
@@ -658,7 +657,7 @@
                 
                 <a href="https://arumodel.co.jp/" target="_blank" class="exhibitor">
                     <div class="exhibitor-img">
-                        <img src="images/aru-model.jpg" alt="アルモデル" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/almodel.jpg" alt="アルモデル" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>アルモデル</h3>
@@ -669,7 +668,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/iori-kobo.jpg" alt="ＩＯＲＩ工房" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/iori-kobo.jpg" alt="ＩＯＲＩ工房" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>ＩＯＲＩ工房</h3>
@@ -680,7 +679,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/ikeda-modeling.jpg" alt="イケダモデリング" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/ikeda-modeling.jpg" alt="イケダモデリング" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>イケダモデリング</h3>
@@ -691,7 +690,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/egg-kobo.jpg" alt="エッグ工房" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/egg-kobo.jpg" alt="エッグ工房" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>エッグ工房</h3>
@@ -702,7 +701,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/n-koya.jpg" alt="エヌ小屋" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/n-goya.jpg" alt="エヌ小屋" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>エヌ小屋</h3>
@@ -713,7 +712,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/nshell.jpg" alt="Nshell" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/nshell.jpg" alt="Nshell" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>Nshell</h3>
@@ -723,7 +722,7 @@
                 
                 <a href="https://www.katsumi-modelshop.jp/" target="_blank" class="exhibitor">
                     <div class="exhibitor-img">
-                        <img src="images/katsumi.jpg" alt="株式会社カツミ" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/katsumi.jpg" alt="株式会社カツミ" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>株式会社カツミ</h3>
@@ -734,7 +733,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/kishu-railway.jpg" alt="紀州鉄道株式会社" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/kishu-tetsudo.jpg" alt="紀州鉄道株式会社" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>紀州鉄道株式会社</h3>
@@ -745,7 +744,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/kiha-kobo.jpg" alt="キハ工房" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/kiha-kobo.jpg" alt="キハ工房" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>キハ工房</h3>
@@ -756,7 +755,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/kurikara-sharyo.jpg" alt="倶利伽羅車両製造" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/kurikara-sharyo.jpg" alt="倶利伽羅車両製造" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>倶利伽羅車両製造</h3>
@@ -767,7 +766,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/kuroki-seisakusho.jpg" alt="黒木製作所(わき役黒ちゃん)" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/kuroki-seisakusho.jpg" alt="黒木製作所(わき役黒ちゃん)" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>黒木製作所(わき役黒ちゃん)</h3>
@@ -778,7 +777,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/keishin-mokei.jpg" alt="京神模型" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/keishin-model.jpg" alt="京神模型" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>京神模型</h3>
@@ -789,7 +788,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/kofu-model.jpg" alt="甲府モデル" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/kofu-model.jpg" alt="甲府モデル" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>甲府モデル</h3>
@@ -800,7 +799,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/korindo.jpg" alt="コリン堂" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/korindo.jpg" alt="コリン堂" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>コリン堂</h3>
@@ -811,7 +810,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/tetsudo-mokei-dojo.jpg" alt="鉄道模型道場" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/tetsudo-mokei-dojo.jpg" alt="鉄道模型道場" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>鉄道模型道場</h3>
@@ -822,7 +821,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/tramway.jpg" alt="トラムウェイ" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/tramway.jpg" alt="トラムウェイ" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>トラムウェイ</h3>
@@ -833,7 +832,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/treasure-town.jpg" alt="トレジャータウン" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/treasure-town.jpg" alt="トレジャータウン" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>トレジャータウン</h3>
@@ -843,7 +842,7 @@
                 
                 <a href="https://www.baiodo.com/" target="_blank" class="exhibitor">
                     <div class="exhibitor-img">
-                        <img src="images/baiodo.jpg" alt="梅桜堂" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/baiodo.jpg" alt="梅桜堂" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>梅桜堂</h3>
@@ -853,7 +852,7 @@
                 
                 <div class="exhibitor" style="cursor: default;">
                     <div class="exhibitor-img">
-                        <img src="images/playtechnos.jpg" alt="プレイテクノス" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/playtechnos.jpg" alt="プレイテクノス" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>プレイテクノス</h3>
@@ -863,7 +862,7 @@
                 
                 <a href="http://www.hogaraka.co.jp/" target="_blank" class="exhibitor">
                     <div class="exhibitor-img">
-                        <img src="images/rodo.jpg" alt="株式会社朗堂" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/rodo.jpg" alt="株式会社朗堂" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>株式会社朗堂</h3>
@@ -874,7 +873,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/pochi-kobo.jpg" alt="Pochi。工房" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/pochi-kobo.jpg" alt="Pochi。工房" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>Pochi。工房</h3>
@@ -884,7 +883,7 @@
                 
                 <a href="https://hs-tamtam.co.jp/" target="_blank" class="exhibitor">
                     <div class="exhibitor-img">
-                        <img src="images/hobby-shop-tamtam.jpg" alt="ホビーショップタムタム" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/hobby-shop-tamtam.jpg" alt="ホビーショップタムタム" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>ホビーショップタムタム</h3>
@@ -894,7 +893,7 @@
                 
                 <a href="https://www.miyakomokei.com/" target="_blank" class="exhibitor">
                     <div class="exhibitor-img">
-                        <img src="images/miyako-model.jpg" alt="みやこ模型" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/miyako-model.jpg" alt="みやこ模型" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>みやこ模型</h3>
@@ -904,7 +903,7 @@
                 
                 <a href="https://kyoto-maruya.com/" target="_blank" class="exhibitor">
                     <div class="exhibitor-img">
-                        <img src="images/mokei-maruya.jpg" alt="模型の丸屋" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/mokei-maruya.jpg" alt="模型の丸屋" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>模型の丸屋</h3>
@@ -914,7 +913,7 @@
                 
                 <a href="http://model-kobou-p-6.com/" target="_blank" class="exhibitor">
                     <div class="exhibitor-img">
-                        <img src="images/model-kobo-p6.jpg" alt="MODEL工房P-6" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/model-kobo-p6.jpg" alt="MODEL工房P-6" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>MODEL工房P-6</h3>
@@ -924,7 +923,7 @@
                 
                 <a href="https://x.com/YoshikawaFA" target="_blank" class="exhibitor">
                     <div class="exhibitor-img">
-                        <img src="images/yoshikawa-factory.jpg" alt="ヨシカワ第一工廠" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/yoshikawa-factory.jpg" alt="ヨシカワ第一工廠" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>ヨシカワ第一工廠</h3>
@@ -934,7 +933,7 @@
                 
                 <a href="https://yomix.booth.pm/" target="_blank" class="exhibitor">
                     <div class="exhibitor-img">
-                        <img src="images/yomitex.jpg" alt="ヨミテックス" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/yomitex.jpg" alt="ヨミテックス" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>ヨミテックス</h3>
@@ -945,7 +944,7 @@
                 <a href="https://www.rcawaza.co.jp/" target="_blank" class="exhibitor">
                     
                     <div class="exhibitor-img">
-                        <img src="images/railcraft-awaza.jpg" alt="レールクラフト阿波座" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/rcawaza.jpg" alt="レールクラフト阿波座" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>レールクラフト阿波座</h3>
@@ -956,7 +955,7 @@
                 <div class="exhibitor" style="cursor: default;">
                     
                     <div class="exhibitor-img">
-                        <img src="images/yn-kanri.jpg" alt="YN管理" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
+                        <img src="./images/yn-kanri.jpg" alt="YN管理" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\'>画像準備中</div>';">
                     </div>
                     <div class="exhibitor-info">
                         <h3>YN管理</h3>
@@ -1002,17 +1001,17 @@
             const downloadBtn = document.getElementById('downloadBtn');
             
             if (type === 'poster') {
-                modalImg.src = 'images/osaka-poster-012.jpg';
+                modalImg.src = './images/osaka-poster-012.jpg';
                 modalImg.alt = '第12回おおさか鉄道模型バザール ポスター';
                 downloadBtn.href = modalImg.src;
                 downloadBtn.download = 'osaka_railway_bazaar_poster.jpg';
             } else if (type === 'map') {
-                modalImg.src = 'images/osaka-map-012.jpg';
+                modalImg.src = './images/osaka-map-012.jpg';
                 modalImg.alt = '会場マップ';
                 downloadBtn.href = modalImg.src;
                 downloadBtn.download = 'osaka_railway_bazaar_map.jpg';
             } else if (type === 'photo') {
-                modalImg.src = 'images/osaka-photo-012.jpg';
+                modalImg.src = './images/osaka-photo-012.jpg';
                 modalImg.alt = '集合写真';
                 downloadBtn.href = modalImg.src;
                 downloadBtn.download = 'osaka_railway_bazaar_photo.jpg';
