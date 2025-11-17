@@ -169,6 +169,12 @@
             opacity: 0.95;
         }
         
+        .time-highlight {
+            color: #ff6b6b;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+        }
+        
         .hero-info-item p.small {
             font-size: 0.95rem;
             margin-top: 8px;
@@ -688,6 +694,73 @@
             }
         }
         
+        /* ワークショップフロー */
+        .workshop-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .flow-item {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 200px;
+            position: relative;
+        }
+        
+        .flow-item .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff6b6b;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .flow-item h5 {
+            color: #15803d;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        
+        .flow-item p {
+            color: #666;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        
+        .flow-arrow {
+            font-size: 2rem;
+            color: #16a34a;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .workshop-flow {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+        
         .diorama-sample-caption {
             margin-top: 20px;
             font-size: 0.9rem;
@@ -847,7 +920,7 @@
                 </p>
                 <p>
                     <span class="date">2026年1月11日(日)</span>
-                    <span class="time">10:00～15:00</span>
+                    <span class="time">10:00～<span class="time-highlight">15:00</span></span>
                 </p>
             </div>
             <div class="hero-info-item">
@@ -908,6 +981,21 @@
                     <h4>学びながら作る！ジオラマ制作体験！</h4>
                     <p>初心者でも楽しめるジオラマ制作体験コーナーを開設。<br>
                     専門スタッフが丁寧に指導しますので、お子様から大人まで安心してご参加いただけます。</p>
+                    
+                    <!-- ワークショップフロー -->
+                    <div class="workshop-flow">
+                        <div class="flow-item">
+                            <span class="step-number">1</span>
+                            <h5>なぜ？「講義・解説」</h5>
+                            <p>地形の成り立ちや<br>自然の仕組みを学ぶ</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-item">
+                            <span class="step-number">2</span>
+                            <h5>考えながら作る</h5>
+                            <p>学んだ知識を活かして<br>自分だけの作品を制作</p>
+                        </div>
+                    </div>
                     
                     <p style="margin-top: 20px; line-height: 1.8;">科学の視点で"世界の成り立ち"を読み解きながら、ジオラマづくりに挑戦するワークショップです。水の流れが地形をつくる仕組み、地層が語る土地の歴史、町の形に影響を与えた文化的背景など、理科と社会を横断して学べるミニ講座からスタート。その後、得た知識をもとに、自分だけの地形モデルを設計・造形します。「科学で世界がわかる！」という実感が芽生える、幼児〜小学生の知的好奇心を刺激する体験型プログラムです。</p>
                     
