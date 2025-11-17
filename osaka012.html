@@ -521,7 +521,180 @@
             font-size: 24px;
             font-weight: bold;
         }
+
+        /* イベント内容セクション */
+        .event-content {
+            margin-top: 60px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
         
+        .event-content h3 {
+            text-align: center;
+            color: #15803d;
+            margin-bottom: 40px;
+            font-size: 1.8rem;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .content-item {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .content-item h4 {
+            color: #15803d;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .content-item p {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        /* ジオラマ制作体験の特別セクション */
+        .diorama-special {
+            background: linear-gradient(135deg, #f0fdf4, #e6f7ff);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .diorama-special::before {
+            content: '初開催！';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            animation: badge-pulse 2s infinite;
+        }
+        
+        .diorama-special h4 {
+            color: #15803d;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .diorama-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .diorama-info {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .diorama-info h5 {
+            color: #16a34a;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .diorama-info ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .diorama-info li {
+            padding: 5px 0;
+            color: #555;
+        }
+        
+        .diorama-info li:before {
+            content: "✓ ";
+            color: #16a34a;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        /* 予約ボタン */
+        .reservation-button {
+            display: inline-block;
+            background: #16a34a;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 30px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+        }
+        
+        .reservation-button:hover {
+            background: #15803d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(22, 163, 74, 0.4);
+        }
+        
+        .reservation-button-wrapper {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        /* ジオラマサンプル画像 */
+        .diorama-sample {
+            margin: 30px auto;
+            text-align: center;
+            position: relative;
+            max-width: 400px;
+        }
+        
+        .diorama-sample-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            aspect-ratio: 1/1;
+            object-fit: contain;
+            animation: gentle-float 4s ease-in-out infinite;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+        }
+        
+        @keyframes gentle-float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-10px) rotate(1deg);
+            }
+            50% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            75% {
+                transform: translateY(-5px) rotate(-1deg);
+            }
+        }
+        
+        .diorama-sample-caption {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
         /* レスポンシブ対応 */
         @media (max-width: 768px) {
             .hero h1 {
@@ -537,6 +710,31 @@
                 grid-template-columns: 1fr;
             }
             
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .diorama-details {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .diorama-special {
+                padding: 25px;
+            }
+            
+            .diorama-special::before {
+                font-size: 0.8rem;
+                padding: 3px 10px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .diorama-sample-image {
+                max-width: 300px;
+                animation-duration: 5s;
+            }
+
             .content-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -591,6 +789,34 @@
             
             .nav-content {
                 font-size: 0.9rem;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+            
+            .nav-title {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .top-link {
+                padding: 3px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .back-to-top::after {
+                font-size: 20px;
             }
         }
     </style>
@@ -661,6 +887,65 @@
                     <p>集合写真</p>
                 </div>
             </div>
+            <!-- イベント内容 -->
+            <div class="event-content">
+                <h3>イベント内容</h3>
+                
+                <div class="content-grid">
+                    <div class="content-item">
+                        <h4>人気の鉄道模型メーカーによる販売会</h4>
+                        <p>人気の鉄道模型メーカー＆ショップが大集合！ 新製品から限定品まで幅広く展示・販売。各メーカーのスタッフと直接話せる貴重な機会です。</p>
+                    </div>
+                    
+                    <div class="content-item">
+                        <h4>鉄道模型レイアウト展示</h4>
+                        <p>Nゲージ・ナローゲージのレイアウト展示</p>
+                    </div>
+                </div>
+                
+                <!-- ジオラマ制作体験 特別セクション -->
+                <div class="diorama-special">
+                    <h4>学びながら作る！ジオラマ制作体験！</h4>
+                    <p>初心者でも楽しめるジオラマ制作体験コーナーを開設。<br>
+                    専門スタッフが丁寧に指導しますので、お子様から大人まで安心してご参加いただけます。</p>
+                    
+                    <p style="margin-top: 20px; line-height: 1.8;">科学の視点で"世界の成り立ち"を読み解きながら、ジオラマづくりに挑戦するワークショップです。水の流れが地形をつくる仕組み、地層が語る土地の歴史、町の形に影響を与えた文化的背景など、理科と社会を横断して学べるミニ講座からスタート。その後、得た知識をもとに、自分だけの地形モデルを設計・造形します。「科学で世界がわかる！」という実感が芽生える、幼児〜小学生の知的好奇心を刺激する体験型プログラムです。</p>
+                    
+                    <!-- ジオラマサンプル画像 -->
+                    <div class="diorama-sample">
+                        <img src="./images/diorama-sample.png" alt="ジオラマ制作体験サンプル作品" class="diorama-sample-image" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'exhibitor-img-placeholder\' style=\'padding: 60px; background: linear-gradient(135deg, #f0f0f0, #e0e0e0); border-radius: 12px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center;\'>サンプル画像準備中</div>';">
+                        <p class="diorama-sample-caption">※制作できる作品の一例です</p>
+                    </div>
+                    
+                    <div class="diorama-details">
+                        <div class="diorama-info">
+                            <h5>体験内容</h5>
+                            <ul>
+                                <li>本物のような石を作り分ける、地形を再現するなど、本格的なジオラマ制作</li>
+                                <li>静電気を使った草の立ち上げなど、専門的だけど楽しい特殊技法</li>
+                                <li>季節表現（雪・紅葉・植物の変化など）を工作を通して体験</li>
+                                <li>「この地形はどうしてできたの？」など自然の歴史に触れるきっかけづくり</li>
+                                <li>冬に姿を見せる生き物の痕跡など、身近な自然に興味を持てるトピックも紹介</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="diorama-info">
+                            <h5>参加について</h5>
+                            <ul>
+                                <li>事前予約制</li>
+                                <li>参加費：4000円（材料費込み）</li>
+                                <li>所要時間：約60分</li>
+                                <li>対象：小学生以上(保護者同伴可/大人参加可)</li>
+                                <li>作品はお持ち帰りいただけます。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="reservation-button-wrapper">
+                        <a href="https://diorama.peatix.com/" target="_blank" class="reservation-button">事前予約はこちら</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     
@@ -672,26 +957,7 @@
     </div>
     
     <!-- イベント内容セクション -->
-    <section class="section content-section">
-        <div class="container">
-            <h2>イベント内容</h2>
-            <div class="content-grid">
-                <div class="content-item">
-                    <h3>人気の鉄道模型メーカーによる販売会</h3>
-                    <p>国内外の人気鉄道模型メーカーが一堂に会し、新製品から限定品まで幅広く展示販売。各メーカーのスタッフと直接話せる貴重な機会です。</p>
-                </div>
-                <div class="content-item">
-                    <h3>鉄道模型レイアウト展示</h3>
-                    <p>精巧に作られた大型レイアウトや、個性豊かなモジュールレイアウトを多数展示。実際の運転シーンを間近でご覧いただけます。</p>
-                </div>
-                <div class="content-item">
-                    <h3>学びながら作る！ジオラマ製作体験！</h3>
-                    <p>初心者でも楽しめるジオラマ製作体験コーナーを開設。専門スタッフが丁寧に指導しますので、お子様から大人まで安心してご参加いただけます。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
+
     <!-- 出展者一覧セクション -->
     <section id="exhibitors" class="section exhibitors-section">
         <div class="container">
@@ -1053,6 +1319,9 @@
         </div>
     </section>
     
+    <!-- ページトップへ戻るボタン -->
+    <a href="#home" class="back-to-top" id="backToTop"></a>
+    
     <footer class="footer">
         <p>&copy; 2025 鉄道模型バザール実行委員会. All rights reserved.</p>
     </footer>
@@ -1096,6 +1365,25 @@
             if (event.key === 'Escape') {
                 document.getElementById('imageModal').style.display = 'none';
             }
+        });
+        
+        // ページトップへ戻るボタンの表示/非表示制御
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        
+        // スムーススクロール
+        document.getElementById('backToTop').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     </script>
 </body>
