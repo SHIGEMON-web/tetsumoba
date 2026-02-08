@@ -142,6 +142,7 @@
             font-size: 1.2rem;
             margin-bottom: 1.5rem;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            display: none; /* 非表示に変更 */
         }
 
         /* セクション共通 */
@@ -1021,29 +1022,6 @@
                 最新の鉄道模型に出会えるチャンスをお見逃しなく！</p>
             </div>
             
-            <div class="locations">
-                <div class="location-card">
-                    <div class="location-image osaka-bg">
-                        <div class="location-overlay">
-                            <div class="location-title">おおさか鉄道模型バザール</div>
-                        </div>
-                    </div>
-                    <div class="location-content">
-                        <p>大阪梅田にて毎年年末ごろに開催。ディーラーやお客様も各地から集まります。普段買うことのできないアイテムを見つけるチャンスです。</p>
-                    </div>
-                </div>
-                
-                <div class="location-card">
-                    <div class="location-image nagoya-bg">
-                        <div class="location-overlay">
-                            <div class="location-title">ナゴヤ鉄道模型バザール</div>
-                        </div>
-                    </div>
-                    <div class="location-content">
-                        <p>中部の鉄道模型ファン必見のナゴヤでの販売会です。フォトスポットなどのコンテンツも。</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1257,7 +1235,7 @@
             
             <!-- お問い合わせボタン -->
             <div style="text-align: center; margin: 2rem 0;">
-                <a href="mailto:shigemaru1227@gmail.com?subject=鉄道模型バザールに関するお問い合わせ" class="contact-btn" style="background: linear-gradient(45deg, #1e3a8a, #3b82f6); color: white; padding: 1.2rem 3rem; display: inline-block; text-decoration: none; border-radius: 8px; font-size: 1.2rem; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);">
+                <a href="/cdn-cgi/l/email-protection#0d7e65646a68606c7f783c3f3f3a4d6a606c6461236e6260327e786f67686e7930e48489e48c9eeba5ace89386ee8e9dee8fbbee8eb1ee8ea6ee8ca6e49bafee8c94ee8f86ee8c87e89882ee8c89e89d85ee8f82ee8c96" class="contact-btn" style="background: linear-gradient(45deg, #1e3a8a, #3b82f6); color: white; padding: 1.2rem 3rem; display: inline-block; text-decoration: none; border-radius: 8px; font-size: 1.2rem; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);">
                     <span style="display: flex; align-items: center; gap: 0.8rem;">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -1272,7 +1250,7 @@
             <div style="text-align: center; margin-top: 1rem;">
                 <p style="color: #9ca3af; font-size: 0.9rem;">
                     ※ メールクライアントが起動します。<br>
-                    メールが開かない場合は、<strong>shigemaru1227@gmail.com</strong> 宛てに直接お送りください。
+                    メールが開かない場合は、<strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4a3922232d2f272b383f7b78787d0a2d272b232664292527">[email&#160;protected]</a></strong> 宛てに直接お送りください。
                 </p>
             </div>
             
@@ -1290,7 +1268,7 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // スムーススクロール（改善版）
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1427,15 +1405,4 @@
                         <h3 class="article-title">${articleData.title}</h3>
                         <p class="article-excerpt">${articleData.excerpt}</p>
                     </div>
-                </article>
-            `;
-            articlesGrid.insertAdjacentHTML('beforeend', articleHTML);
-            
-            // 特集記事セクションを表示
-            document.querySelector('.articles').classList.add('show');
-            
-            // もっと見るボタンの更新
-            updateShowMoreButton();
-        }
-
-    
+                </a
