@@ -211,7 +211,16 @@
   .note-box b{color:var(--ink);}
 
   footer.site{background:var(--deep); color:rgba(255,255,255,0.55); padding:34px 0; font-size:0.8rem;}
-  .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
+  .foot-row{display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;}
+  .foot-links{display:flex; gap:22px; flex-wrap:wrap; justify-content:center; align-items:center;}
+  .foot-links a{color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; transition:color .2s;}
+  .foot-links a:hover{color:#fff;}
+  .foot-label{color:rgba(255,255,255,0.5); font-size:0.78rem;}
+
+  #events .eyebrow, #history .eyebrow{display:flex; justify-content:center; width:fit-content; margin:0 auto 14px;}
+  #events .section-head, #history .section-head{text-align:center;}
+  #events .section-head p, #history .section-head p{margin:12px auto 0;}
+  #history .tabs{justify-content:center;}
 
   @media (max-width:860px){
     .nav-links{display:none;}
@@ -220,6 +229,10 @@
     .about-photo{height:200px; order:-1;}
     .feat-list{grid-template-columns:1fr;}
     .feat{border-right:none;}
+    #about .eyebrow{display:flex; justify-content:center; width:fit-content; margin:0 auto 14px;}
+    .about-copy{text-align:center;}
+    .about-copy p{margin:0 auto;}
+    .foot-links{flex-direction:column; gap:8px;}
   }
 </style>
 </head>
@@ -411,7 +424,12 @@
 
 <footer class="site">
   <div class="wrap foot-row">
-    <span>&copy; 2025 鉄道模型バザール実行委員会. All rights reserved.</span>
+    <div class="foot-links">
+      <span class="foot-label">関連イベント：</span>
+      <a href="https://fesuta.web.fc2.com/" target="_blank">さいたま鉄道模型フェスタ</a>
+      <a href="https://tetsudoplace.com/" target="_blank">鉄道プレイス</a>
+    </div>
+    <span>&copy; 2026 鉄道模型バザール実行委員会. All rights reserved.</span>
   </div>
 </footer>
 

@@ -203,11 +203,27 @@
   .back-to-top::after{content:'↑'; font-size:1.2rem;}
 
   footer.site{background:var(--deep); color:rgba(255,255,255,0.55); padding:30px 0; font-size:0.8rem; text-align:center;}
+  .foot-links{display:flex; gap:22px; flex-wrap:wrap; justify-content:center; align-items:center; margin-bottom:14px;}
+  .foot-links a{color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; transition:color .2s;}
+  .foot-links a:hover{color:#fff;}
+  .foot-label{color:rgba(255,255,255,0.5); font-size:0.78rem;}
 
   @media (max-width:760px){
     .board{grid-template-columns:1fr;}
-    .media-grid{grid-template-columns:1fr;}
     .content-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:480px){
+    .media-grid{grid-template-columns:repeat(2,1fr); max-width:320px;}
+    .exh-grid{grid-template-columns:1fr;}
+    .exh{
+      display:grid; grid-template-columns:72px 1fr; grid-template-rows:auto 1fr;
+      column-gap:12px; row-gap:2px; align-items:start; padding:12px 44px 12px 12px;
+    }
+    .exh-img{grid-column:1; grid-row:1/3; width:72px; height:72px; margin-bottom:0;}
+    .exh h3{grid-column:2; grid-row:1; font-size:0.82rem; margin-bottom:2px; line-height:1.3;}
+    .exh p{grid-column:2; grid-row:2; font-size:0.72rem; line-height:1.4;}
+    .exh-badge{top:10px; right:10px; font-size:0.6rem; padding:2px 8px;}
+    .foot-links{flex-direction:column; gap:8px;}
   }
 </style>
 </head>
@@ -362,7 +378,7 @@
       <h3>Nshell</h3>
       <p>100均で売っているA5サイズ、B5サイズのコンパクトなケースが車両ケースになる中敷きを販売しています。</p>
     </div>
-    <a class="exh" href="https://www.katsumi-modelshop.jp/" target="_blank">
+    <a class="exh" href="https://www.ktm-models.co.jp/" target="_blank">
       <div class="exh-img"><img src="images/katsumi.jpg" alt="株式会社カツミ" loading="lazy" onerror="this.parentElement.innerHTML='<span class=&quot;ph&quot;>株</span>'"></div>
       <h3>株式会社カツミ</h3>
       <p>1/80真鍮製鉄道模型の製造メーカーです。</p>
@@ -502,7 +518,14 @@
 <a href="#home" class="back-to-top" id="backToTop"></a>
 
 <footer class="site">
-  <div class="wrap">&copy; 2025 鉄道模型バザール実行委員会. All rights reserved.</div>
+  <div class="wrap">
+    <div class="foot-links">
+      <span class="foot-label">関連イベント：</span>
+      <a href="https://fesuta.web.fc2.com/" target="_blank">さいたま鉄道模型フェスタ</a>
+      <a href="https://tetsudoplace.com/" target="_blank">鉄道プレイス</a>
+    </div>
+    &copy; 2026 鉄道模型バザール実行委員会. All rights reserved.
+  </div>
 </footer>
 
 <script>
