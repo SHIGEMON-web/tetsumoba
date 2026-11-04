@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第13回 おおさか鉄道模型バザール</title>
+<link rel="icon" type="image/png" href="favicon.png">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#12203f;
+    --ink-muted:#5b6472;
+    --ink-faint:#9aa2ae;
+    --bg:#f6f6f4;
+    --surface:#ffffff;
+    --line:#e2e3e0;
+    --accent:#7c9a2b;
+    --accent-deep:#5a7a1f;
+    --deep:#0d1830;
+    --deep-2:#16234a;
+    --deep-text:#c8e07a;
+    --deep-line:rgba(255,255,255,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+    line-height:1.75; font-feature-settings:"palt";
+  }
+  h1,h2,h3,h4{font-family:'Zen Kaku Gothic New','Noto Sans JP',sans-serif; text-wrap:balance; margin:0;}
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  .num{font-variant-numeric:tabular-nums;}
+  .nb{white-space:nowrap;}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+  header.site .wrap{padding:0 40px;}
+
+  header.site{
+    position:sticky; top:0; width:100%; z-index:200;
+    background:rgba(246,246,244,0.92); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .site-nav{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; min-height:68px; row-gap:8px; padding:10px 0;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); font-weight:700; font-size:0.96rem; letter-spacing:0.01em; white-space:nowrap; flex-shrink:0;}
+  .nav-links{display:flex; gap:1.8rem; align-items:center; list-style:none; margin:0; padding:0; flex-wrap:wrap; row-gap:6px;}
+  .nav-links a{text-decoration:none; color:var(--ink-muted); font-size:0.84rem; font-weight:500; letter-spacing:0.02em; transition:color .2s;}
+  .nav-links a:hover{color:var(--accent-deep);}
+  .nav-links .top-link{
+    background:var(--ink); color:#fff; padding:7px 16px; border-radius:2px; font-size:0.8rem; font-weight:700;
+  }
+  .nav-links .top-link:hover{background:var(--accent-deep); color:#fff;}
+  @media (max-width:860px){
+    .site-nav{justify-content:center; flex-wrap:wrap; height:auto; padding:12px 0; gap:10px;}
+    .nav-links{flex-wrap:wrap; justify-content:center; gap:0.9rem 1.2rem;}
+  }
+
+  /* ---- hero ---- */
+  .hero{
+    background:linear-gradient(180deg, rgba(13,24,48,0.86), rgba(13,24,48,0.96));
+    color:#fff; padding:64px 0 60px; text-align:center; position:relative; overflow:hidden;
+  }
+  .hero::after{
+    content:''; position:absolute; left:0; right:0; bottom:0; height:1px;
+    background:linear-gradient(90deg, transparent, var(--deep-text) 50%, transparent); opacity:.5;
+  }
+  .ticker{
+    display:flex; align-items:center; justify-content:center; gap:10px; color:var(--deep-text);
+    font-size:0.74rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:18px;
+  }
+  .ticker .dot{width:6px; height:6px; border-radius:50%; background:var(--deep-text); animation:blink 1.6s step-start infinite;}
+  @keyframes blink{ 50%{opacity:.25;} }
+  @media (prefers-reduced-motion: reduce){ .ticker .dot{animation:none;} }
+  .hero h1{font-size:clamp(1.9rem,4vw,2.7rem); font-weight:900; letter-spacing:0.02em; margin-bottom:30px;}
+
+  .board{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--deep-line); border:1px solid var(--deep-line); border-radius:2px; overflow:hidden;
+    max-width:700px; margin:0 auto;
+  }
+  .board-cell{background:rgba(13,24,48,0.55); padding:16px 18px; text-align:center;}
+  .board-cell .k{font-size:0.66rem; letter-spacing:0.12em; color:rgba(255,255,255,0.55); text-transform:uppercase; margin-bottom:6px;}
+  .board-cell .v{font-size:0.98rem; font-weight:700; color:#fff; line-height:1.5;}
+  .board-cell .v small{display:block; font-size:0.74rem; font-weight:500; color:var(--deep-text); margin-top:4px;}
+
+  /* ---- section shell ---- */
+  .section{padding:76px 0; scroll-margin-top:84px;}
+  .section.alt{background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px; justify-content:center;
+    font-size:0.74rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--accent-deep); margin-bottom:14px; width:100%;
+  }
+  .eyebrow::before, .eyebrow::after{content:''; width:18px; height:1px; background:var(--accent-deep);}
+  .section-head{text-align:center; margin-bottom:44px;}
+  .section-head h2{font-size:clamp(1.4rem,2.4vw,1.9rem); font-weight:700;}
+
+  /* ---- media (poster/map/photo) ---- */
+  .media-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); max-width:560px; margin:0 auto;}
+  .media-item{background:var(--surface); text-align:center; padding:22px 18px 24px;}
+  .media-thumb{
+    cursor:pointer; aspect-ratio:3/4; background:#eceae4; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+  }
+  .media-thumb img{width:100%; height:100%; object-fit:cover;}
+  .media-thumb .ph{color:var(--ink-faint); font-size:0.85rem;}
+  .media-item p{font-size:0.82rem; color:var(--ink-muted);}
+
+  /* ---- event content ---- */
+  .content-grid{display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--line); border-left:1px solid var(--line); margin-top:56px;}
+  .content-item{padding:28px 30px; border-bottom:1px solid var(--line); border-right:1px solid var(--line);}
+  .content-item h4{font-size:1rem; margin-bottom:10px; color:var(--accent-deep);}
+  .content-item p{font-size:0.88rem; color:var(--ink-muted);}
+
+  .diorama{
+    margin-top:56px; background:var(--deep); color:rgba(255,255,255,0.9);
+    padding:44px clamp(20px,4vw,52px); position:relative; text-align:center;
+  }
+  .diorama .badge{
+    position:absolute; top:20px; right:20px; background:var(--deep-text); color:var(--deep);
+    font-size:0.72rem; font-weight:800; padding:5px 12px; border-radius:20px; letter-spacing:0.04em;
+  }
+  .diorama h4{font-size:1.3rem; color:#fff; margin:0 auto 16px; max-width:34ch;}
+  .diorama > p{font-size:0.9rem; color:rgba(255,255,255,0.72); max-width:62ch; margin:0 auto 28px;}
+  .flow{display:flex; align-items:center; justify-content:center; gap:22px; flex-wrap:wrap; margin-bottom:28px;}
+  .flow-item{
+    background:rgba(255,255,255,0.06); border:1px solid var(--deep-line); border-radius:4px;
+    padding:18px 22px; min-width:190px; text-align:center; position:relative;
+  }
+  .flow-item .stepnum{
+    position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+    width:26px; height:26px; border-radius:50%; background:var(--deep-text); color:var(--deep);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem;
+  }
+  .flow-item h5{font-size:0.98rem; color:var(--deep-text); margin:8px 0 6px;}
+  .flow-item p{font-size:0.82rem; color:rgba(255,255,255,0.65); margin:0;}
+  .flow-arrow{font-size:1.4rem; color:var(--deep-text);}
+  @media (max-width:640px){ .flow{flex-direction:column;} .flow-arrow{transform:rotate(90deg);} }
+  .diorama-desc{font-size:0.88rem; color:rgba(255,255,255,0.72); line-height:1.9; max-width:70ch; margin:0 auto 30px; text-align:left;}
+  .diorama-sample{max-width:280px; margin:0 auto 32px;}
+  .diorama-sample-img{aspect-ratio:1/1; background:rgba(255,255,255,0.06); border:1px solid var(--deep-line); border-radius:4px; overflow:hidden; display:flex; align-items:center; justify-content:center;}
+  .diorama-sample-img img{width:100%; height:100%; object-fit:cover;}
+  .diorama-sample-img .ph{color:rgba(255,255,255,0.5); font-size:0.78rem;}
+  .diorama-sample-caption{font-size:0.76rem; color:rgba(255,255,255,0.55); text-align:center; margin-top:10px;}
+  .diorama-details{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:8px; text-align:left;}
+  .diorama-info{background:rgba(255,255,255,0.06); border:1px solid var(--deep-line); border-radius:4px; padding:20px 22px;}
+  .diorama-info h5{font-size:0.92rem; color:var(--deep-text); margin-bottom:10px;}
+  .diorama-info ul{list-style:none; padding:0; margin:0;}
+  .diorama-info li{font-size:0.85rem; color:rgba(255,255,255,0.78); padding:4px 0;}
+  .diorama-info li::before{content:'○ '; color:var(--deep-text);}
+  @media (max-width:640px){ .diorama-details{grid-template-columns:1fr;} }
+  .reservation{text-align:center; margin-top:28px;}
+  .reservation a{
+    display:inline-block; background:var(--deep-text); color:var(--deep); font-weight:700; font-size:0.9rem;
+    padding:13px 32px; border-radius:2px; text-decoration:none;
+  }
+
+  /* ---- exhibitors ---- */
+  .exh-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .exh{background:var(--surface); padding:20px; text-decoration:none; color:inherit; transition:background .2s; position:relative;}
+  .exh:hover{background:var(--bg);}
+  .exh-badge{position:absolute; top:14px; right:14px; background:var(--accent-deep); color:#fff; font-size:0.68rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.04em; z-index:1;}
+  .exh-img{aspect-ratio:1/1; background:#eceae4; margin-bottom:14px; display:flex; align-items:center; justify-content:center; overflow:hidden;}
+  .exh-img img{width:100%; height:100%; object-fit:contain;}
+  .exh-img .ph{color:var(--ink-faint); font-size:0.78rem;}
+  .exh h3{font-size:0.94rem; margin-bottom:8px;}
+  .exh:hover h3{color:var(--accent-deep);}
+  .exh p{font-size:0.78rem; color:var(--ink-muted); line-height:1.6;}
+
+  /* ---- access ---- */
+  .access-box{max-width:760px; margin:0 auto; text-align:center;}
+  .access-box h3{font-size:1.15rem; margin-bottom:14px;}
+  .access-box p.addr{color:var(--ink-muted); font-size:0.9rem; margin-bottom:26px;}
+  .map{width:100%; height:360px; border:1px solid var(--line);}
+  .map-note{
+    margin-top:22px; text-align:left; font-size:0.8rem; color:var(--ink-muted);
+    border-left:3px solid var(--accent-deep); padding:12px 16px; background:var(--surface);
+  }
+
+  /* modal */
+  .modal{display:none; position:fixed; inset:0; z-index:9999; background:rgba(13,24,48,0.94); padding:60px 20px;}
+  .modal.open{display:flex; align-items:center; justify-content:center;}
+  .modal img{max-width:92vw; max-height:78vh; margin:0 auto; border-radius:2px;}
+  .modal .close{position:absolute; top:22px; right:28px; color:#fff; font-size:2rem; cursor:pointer; line-height:1;}
+  .modal .dl{
+    position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
+    background:var(--deep-text); color:var(--deep); padding:9px 20px; border-radius:20px;
+    font-size:0.82rem; font-weight:700; text-decoration:none;
+  }
+
+  .back-to-top{
+    position:fixed; right:24px; bottom:24px; width:44px; height:44px; border-radius:50%;
+    background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center;
+    text-decoration:none; opacity:0; visibility:hidden; transition:all .25s; z-index:150;
+  }
+  .back-to-top.show{opacity:1; visibility:visible;}
+  .back-to-top::after{content:'↑'; font-size:1.2rem;}
+
+  footer.site{background:var(--deep); color:rgba(255,255,255,0.55); padding:30px 0; font-size:0.8rem; text-align:center;}
+  .foot-links{display:flex; gap:22px; flex-wrap:wrap; justify-content:center; align-items:center; margin-bottom:14px;}
+  .foot-links a{color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.8rem; transition:color .2s;}
+  .foot-links a:hover{color:#fff;}
+  .foot-label{color:rgba(255,255,255,0.5); font-size:0.78rem;}
+
+  @media (max-width:760px){
+    .board{grid-template-columns:1fr;}
+    .content-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:480px){
+    .media-grid{grid-template-columns:repeat(2,1fr); max-width:320px;}
+    .exh-grid{grid-template-columns:1fr;}
+    .exh{
+      display:grid; grid-template-columns:72px 1fr; grid-template-rows:auto 1fr;
+      column-gap:12px; row-gap:2px; align-items:start; padding:12px 44px 12px 12px;
+    }
+    .exh-img{grid-column:1; grid-row:1/3; width:72px; height:72px; margin-bottom:0;}
+    .exh h3{grid-column:2; grid-row:1; font-size:0.82rem; margin-bottom:2px; line-height:1.3;}
+    .exh p{grid-column:2; grid-row:2; font-size:0.72rem; line-height:1.4;}
+    .exh-badge{top:10px; right:10px; font-size:0.6rem; padding:2px 8px;}
+    .foot-links{flex-direction:column; gap:8px;}
+  }
+.exh-img .ph{font-size:2rem;color:var(--accent-deep);font-weight:700}.exh p{overflow-wrap:anywhere}
+.exh-img{background:#fff}.exh-img img{object-fit:contain}
+.exh-img{background:#fff}.exh-img img{object-fit:contain}
+/* 第13回専用カラー */
+:root{--bg:#fff9f3;--ink:#302421;--ink-muted:#67544b;--ink-faint:#78645a;--line:#edd9cc;--accent:#ee653d;--accent-deep:#b5391e;--deep:#943520;--deep-2:#bc4127;--deep-text:#fff0a9;--deep-line:rgba(255,255,255,.35)}
+header.site{background:rgba(255,249,243,.96)}
+.hero{background:linear-gradient(120deg,#c8492c 0%,#ec623d 60%,#f38a42 100%)}
+.hero h1{text-shadow:0 2px 8px rgba(103,28,11,.15)}
+.board-cell{background:rgba(116,34,16,.44)}
+.board-cell .k{color:#ffe8d8}
+.nav-links .top-link{background:var(--accent-deep)}
+.diorama{background:#aa3822}
+.media-thumb{background:#f6e9dd}
+.section-head h2{color:#a3321c}
+.shorty-image{margin:18px 0;background:#fff0e5;aspect-ratio:8/5;overflow:hidden}
+.shorty-image img{width:100%;height:100%;object-fit:contain}
+.exh-img{background:#fff}.exh-img img{object-fit:contain}
+
+/* Publication media controls */
+[hidden]{display:none!important}.media-thumb{width:100%;border:0;padding:0;font:inherit}.media-thumb:disabled{cursor:default;opacity:1}.media-thumb img{object-fit:contain}.shorty-image{display:flex;align-items:center;justify-content:center;text-align:center;color:var(--accent-deep)}.shorty-image .ph{font-size:1.5rem;font-weight:700}.shorty-image small{font-size:.85rem;font-weight:400}.exh-order-note{font-size:.88rem;color:var(--ink-muted);margin:12px 0 0}.map-direct a{color:var(--accent-deep);font-weight:700}.exh:focus-visible,.media-thumb:focus-visible{outline:3px solid var(--accent-deep);outline-offset:3px}
+.exh-img{background:#fff}.exh-img img{object-fit:contain}
+
+/* Scroll reveal */
+.reveal-ready{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease;transition-delay:var(--reveal-delay,0ms)}
+.reveal-ready.is-visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal-ready{opacity:1;transform:none;transition:none}}
+</style>
+<meta name="description" content="2027年1月16日・17日、梅田アクト・スリーホールで開催。第13回おおさか鉄道模型バザールの出展者一覧・イベント情報・アクセスをご案内します。">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-nav">
+    <a href="index.html" class="brand">第13回 おおさか鉄道模型バザール</a>
+    <ul class="nav-links">
+      <li><a href="#media">イベント情報</a></li>
+      <li><a href="#exhibitors">出展者一覧</a></li>
+      <li><a href="#access">アクセス</a></li>
+      <li><a href="index.html" class="top-link">TOPへ戻る</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="home" class="hero">
+  <div class="wrap">
+    <div class="ticker"><span class="dot"></span>NOW BOARDING — イベント詳細</div>
+    <h1>第13回 おおさか鉄道模型バザール</h1>
+    <div class="board">
+      <div class="board-cell">
+        <div class="k">Date / 開催日</div>
+        <div class="v num">2027.01.16<small>(土) 10:00–17:00</small></div>
+      </div>
+      <div class="board-cell">
+        <div class="k">&nbsp;</div>
+        <div class="v num">2027.01.17<small>(日) 10:00–15:00</small></div>
+      </div>
+      <div class="board-cell">
+        <div class="k">Venue &amp; Fee / 会場・入場料</div>
+        <div class="v">梅田アクト・スリーホール<small>入場無料</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="media" class="section">
+  <div class="wrap">
+    <div class="eyebrow">Media</div>
+    <div class="section-head"><h2>イベント情報</h2></div>
+    <div class="media-grid">
+      <div class="media-item"><button class="media-thumb" type="button" disabled onclick="openModal('poster')" aria-label="イベントポスターを拡大"><img src="images/osaka-poster-013.jpg" alt="第13回イベントポスター" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true;this.parentElement.disabled=false" onerror="this.hidden=true"><span class="ph">ポスター準備中</span></button><p>イベントポスター</p></div>
+      <div class="media-item"><button class="media-thumb" type="button" disabled onclick="openModal('map')" aria-label="会場マップを拡大"><img src="images/osaka-map-013.jpg" alt="第13回会場マップ" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true;this.parentElement.disabled=false" onerror="this.hidden=true"><span class="ph">会場マップ準備中</span></button><p>会場マップ</p></div>
+    </div>
+    <div class="content-grid">
+      <div class="content-item"><h4>人気の鉄道模型メーカーによる販売会</h4><p>鉄道模型メーカー＆ショップが大集合。車両キットやパーツ、ストラクチャーなど、各出展者の製品を展示・販売します。</p></div>
+      <div class="content-item"><h4>【企画展】ショーティー模型展</h4><div class="shorty-image"><img src="images/osaka-shorty-013.jpg" alt="ショーティー模型展の紹介写真" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true" onerror="this.hidden=true"><span class="ph">ショーティー模型展<br><small>紹介画像 準備中</small></span></div><p>ショーティー模型の展示を行います。展示内容や関連企画の詳細は、決まり次第お知らせします。</p></div>
+    </div>
+    <div class="diorama"><h4>開催に向けて準備を進めています</h4><p>ポスター・会場マップや催しの詳細は、順次こちらのページでご案内します。</p></div>
+  </div>
+</section>
+
+<div id="imageModal" class="modal" onclick="closeModal(event)">
+  <span class="close" onclick="closeModal(event)">&times;</span>
+  <img id="modalImage" alt="">
+  <a id="downloadBtn" class="dl" download>画像をダウンロード</a>
+</div>
+
+<section id="exhibitors" class="section alt">
+  <div class="wrap">
+    <div class="eyebrow">Exhibitors</div>
+    <div class="section-head"><h2>出展者一覧</h2><p class="exh-order-note">出展者名の読みの五十音順で掲載しています。</p></div>
+    <div class="exh-grid">
+<a class="exh" href="https://aozoradensya.jimdofree.com/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/aozora-densha.jpg" alt="あおぞら電車" loading="lazy"></div><h3>あおぞら電車</h3><p>小さな電車・気動車を中心に製品化している鉄道模型ディーラー「あおぞら電車」です。3Dプリントキットやペーパーキット、各種模型パーツなどを製作・販売しています。</p></a>
+<a class="exh" href="https://akishoo.com/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/get_bored13.jpg" alt="飽き性モデル" loading="lazy"></div><h3>飽き性モデル</h3><p>実車考証をもとに「付ける意味があるディテールアップ」を届けるNゲージ3Dパーツ工房です。</p></a>
+<a class="exh" href="https://x.com/akomo583" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/akomo-kaizousha.jpg" alt="アコモ改造舎" loading="lazy"></div><h3>アコモ改造舎</h3><p>ペーパーによる車輛及びストラクチャー製品のキット及び完成品</p></a>
+<a class="exh" href="http://www.jmra.gr.jp/adachi/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/adachi.gif" alt="株式会社安達製作所" loading="lazy"></div><h3>株式会社安達製作所</h3><p>HO 車両およびパーツ</p></a>
+<a class="exh" href="https://arumo.a.la9.jp/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/almodel.jpg" alt="アルモデル" loading="lazy"></div><h3>アルモデル</h3><p>各種金属製車両キットを製造販売しています</p></a>
+<a class="exh" href="https://iorikoubou.com/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/iori-kobo.jpg" alt="IORI工房" loading="lazy"></div><h3>IORI工房</h3><p>レーザーカットされたペーパーキットを主に制作、販売しています。</p></a>
+<a class="exh" href="http://blog.livedoor.jp/exeplus/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/exe_plus.jpg" alt="EXE plus" loading="lazy"></div><h3>EXE plus</h3><p>欧州型Nゲージで製品化されていない車両を製作するための各種アイテムを製作しています<br>マニアックな車両を再現するためのマニアックなガレージキットメーカーです</p></a>
+<div class="exh"><div class="exh-img"><img src="images/egg-kobo-name.svg" alt="エッグ工房" loading="lazy"></div><h3>エッグ工房</h3><p>情景のある展示台（HO)も販売しております。</p></div>
+<a class="exh" href="https://x.com/cocopapa551" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/n-goya.jpg" alt="エヌ小屋" loading="lazy"></div><h3>エヌ小屋</h3><p>オリジナル内装シートの既存製品・新商品の先行販売あります！！</p></a>
+<a class="exh" href="https://nshell.jimdosite.com/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/nshell.jpg" alt="エヌシェル" loading="lazy"></div><h3>エヌシェル</h3><p>100均ケースを活用したコンパクトな車両ケースを販売しています</p></a>
+<a class="exh" href="https://www.ktm-models.co.jp/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/katsumi.jpg" alt="株式会社カツミ" loading="lazy"></div><h3>株式会社カツミ</h3><p>1/80・1/87真鍮製鉄道模型メーカーです。完成品・キットをはじめ各種パーツを製造販売しています。</p></a>
+<a class="exh" href="https://kitetsu.jp/railway/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/kishu-tetsudo.jpg" alt="紀州鉄道株式会社" loading="lazy"></div><h3>紀州鉄道株式会社</h3><p>鉄道グッズや模型を販売します。</p></a>
+<a class="exh" href="https://kiha-koubou.stores.jp/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/kiha-kobo.jpg" alt="キハ工房" loading="lazy"></div><h3>キハ工房</h3><p>気動車や入替機のペーパーキットのほか、ジオラマに使えるペーパー製ストラクチャーなどを製作、販売しています。</p></a>
+<a class="exh" href="https://x.com/kyomachido" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/kyomachido.jpg" alt="京町堂" loading="lazy"></div><h3>京町堂</h3><p>販売予定の「ライトGゲージ」は、「軽く作る存在感」をコンセプトとするキットシリーズです。ゼンマイ（ABS系樹脂製）を動力としているため、電源を必要とせず、軌間45mmのGゲージ線路でもお楽しみいただけます。今回は古典風自由型車両が中心です。詳細はX（京町堂@kyomachido）をご覧ください。</p></a>
+<a class="exh" href="https://pjkurikara.theshop.jp/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/kurikara-sharyo.jpg" alt="倶利伽羅車両製造" loading="lazy"></div><h3>倶利伽羅車両製造</h3><p>実物レーザー測量などをもとに、雰囲気を大切に模型化設計しています。</p></a>
+<a class="exh" href="https://mokei.keishin-p.co.jp/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/keishin-model.jpg" alt="京神模型" loading="lazy"></div><h3>京神模型</h3><p>表記類・車番類・行先表示などのインレタを中心に、各種パーツを取り揃えております。</p></a>
+<a class="exh" href="https://kofumodel.amebaownd.com/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/kofu-model.jpg" alt="甲府モデル" loading="lazy"></div><h3>甲府モデル</h3><p>貨車を始めとし、客車、電車、機関車、パーツ、ストラクチャー類のペーパーキットをNスケール、1/80などのスケールで再現しております。みんな買ってね。</p></a>
+<a class="exh" href="https://sakuratetsudou.jimdoweb.com/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/sakura.jpg" alt="工房さくら鉄道" loading="lazy"></div><h3>工房さくら鉄道</h3><p>鉄道のある風景を楽しめるジオラマを製作しています。</p></a>
+<a class="exh" href="https://x.com/cocokoubou" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/coco-x.jpg" alt="COCO工房" loading="lazy"></div><h3>COCO工房</h3><p>海外型をメインにNゲージ、ショーティーモデル、HOナローの３Dプリントキットを出品いたします。</p></a>
+<a class="exh" href="https://kowrinmaki.handcrafted.jp/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/korindo.jpg" alt="コリン堂" loading="lazy"></div><h3>コリン堂</h3><p>主に戦前期の鉄道車両などをテーマにした製品展開をしています。</p></a>
+<a class="exh" href="https://minidiorama-y.com/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/diorama-yn.png" alt="ジオラマ工房Y.N" loading="lazy"></div><h3>ジオラマ工房Y.N</h3><p>江戸時代の町並みが残る奈良県五條市新町通の町家にて週末、祭日のみ昔懐かしい模型やとして営業しています。今回のイベントに際し、 手作り鉄道模型ジオラマ、レア物多数のHO、Ｎゲージ鉄道模型を 展示販売させて頂きます。</p></a>
+<a class="exh" href="https://x.com/Xiaolongbaoooon" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/Xiaolongbaoooon.jpg" alt="ショーロンポー/電車ごっこTama" loading="lazy"></div><h3>ショーロンポー/電車ごっこTama</h3><p>TN対応スカートパーツ類や使いやすく設計されたナックルカプラーに<br>大人気の窓スモーク再現フィルムを多数ご用意!!<br>中古鉄道模型の他、関東圏のイベントでしか買えない各種パーツ類も多数ご用意!</p></a>
+<a class="exh" href="https://hs-tamtam.co.jp/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/hobby-shop-tamtam.jpg" alt="株式会社タム・タム" loading="lazy"></div><h3>株式会社タム・タム</h3><p>総合ホビーショップとして北海道から九州まで全国18店舗を展開、通信販売もございます。イベント会場ではお得なイベント特別価格にて販売いたします。皆様のお越しをお待ちしております。</p></a>
+<div class="exh"><div class="exh-img"><img src="images/tetsudo-mokei-dojo-name.svg" alt="鉄道模型道場" loading="lazy"></div><h3>鉄道模型道場</h3><p>国電、気動車、山陽電車等の型紙、ペーパーキットを製作してます。更に新製品も企画しておりますので、よろしくお願いいたします。</p></div>
+<a class="exh" href="http://www.dauphin-mtp.co.jp/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/tramway.jpg" alt="トラムウェイ" loading="lazy"></div><h3>トラムウェイ</h3><p>人気の製品を販売！</p></a>
+<a class="exh" href="https://www.baiodo.com/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/baiodo.jpg" alt="梅桜堂" loading="lazy"></div><h3>梅桜堂</h3><p>昭和から平成、そして現代にも残る懐かしい町並みを再現するジオラマ製品を企画・販売しています。1/150、1/87～/80スケールのペーパーキットや3Dプリント製品をイベント限定価格でご提供。</p></a>
+<a class="exh" href="https://bsaku.base.shop/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/btoretsukuru.jpg" alt="美作商店" loading="lazy"></div><h3>美作商店</h3><p>Ｂヤス（高精度直角研磨台）</p></a>
+<a class="exh" href="https://x.com/gaden_intetsu" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/gaden_intetsu.jpg" alt="プレイテクノス" loading="lazy"></div><h3>プレイテクノス</h3><p>日本型HO・16番模型専門の型紙工房・プレイテクノスと、3D部品のBS工房です。旧型国電の底なし沼に頭のてっぺんまで沈んだ店主２人がお待ちしております。</p></a>
+<a class="exh" href="https://www.hogaraka.co.jp/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/rodo.jpg" alt="株式会社朗堂" loading="lazy"></div><h3>株式会社朗堂</h3><p>大人気のコンテナ製品や模型車両を販売！</p></a>
+<a class="exh" href="https://pochi-kobo.booth.pm/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/pochi-kobo.jpg" alt="Pochi。工房" loading="lazy"></div><h3>Pochi。工房</h3><p>定番品とイベント限定扱いのminiシリーズなど持ち込み予定です。</p></a>
+<a class="exh" href="https://www.miyakomokei.com/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/miyako-model.jpg" alt="みやこ模型" loading="lazy"></div><h3>みやこ模型</h3><p>毎年恒例のおおさか鉄道模型バザールに今年も出店します。<br>お手持ちの車両のグレードアップにお役立てください。</p></a>
+<a class="exh" href="https://kirohayuni.blog.fc2.com/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/MosoFactory.jpg" alt="Moso Factory" loading="lazy"></div><h3>Moso Factory</h3><p>ナローゲージの車両キットや鉄道模型を製作しています。</p></a>
+<a class="exh" href="https://kyoto-maruya.com/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/mokei-maruya.jpg" alt="模型の丸屋" loading="lazy"></div><h3>模型の丸屋</h3><p>他所は作らぬ模型製品</p></a>
+<a class="exh" href="http://model-kobou-p-6.com/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/model-kobo-p6-name.svg" alt="MODEL工房P-6" loading="lazy"></div><h3>MODEL工房P-6</h3><p>阪急のペーパーキットの製作に頑張っております</p></a>
+<a class="exh" href="https://x.com/YoshikawaFA" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/yoshikawa-factory.jpg" alt="ヨシカワ第一工廠" loading="lazy"></div><h3>ヨシカワ第一工廠</h3><p>珍品の車両の3Dプリント製Nゲージキットを製作しています</p></a>
+<a class="exh" href="https://yomix.booth.pm/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/yomitex.jpg" alt="ヨミテックス" loading="lazy"></div><h3>ヨミテックス</h3><p>ヨミレンズはリフレクターの反射や光り方を再現できます。テールライト用も出ました。</p></a>
+<a class="exh" href="https://www.rokuhan.com/" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/rokuhan.png" alt="ロクハン" loading="lazy"></div><h3>ロクハン</h3><p>Zゲージや、Zショーティーの製品展示販売。DCC関連商品の販売など、<br>小さな鉄道模型Zゲージを最大限楽しんでいただける商品を提供します。</p></a>
+<a class="exh" href="https://x.com/uretan_seisaku" target="_blank" rel="noopener noreferrer"><div class="exh-img"><img src="images/yn-kanri.jpg" alt="YN管理" loading="lazy"></div><h3>YN管理</h3><p>鉄道模型の車両ケースに使用するウレタンを制作しています。<br>従来品とは違い、各車に専用設計していますのでジャストフィット!</p></a>
+</div></div></section>
+
+<section id="access" class="section">
+  <div class="wrap access-box">
+    <div class="eyebrow">Access</div>
+    <div class="section-head"><h2>アクセス</h2></div>
+    <h3>梅田アクト・スリーホール</h3>
+    <p class="addr">〒530-0027 大阪市北区堂山町15-17<br>Osaka Metro 谷町線「中崎町」駅より徒歩約2分<br>Osaka Metro 御堂筋線「梅田」駅・阪急「大阪梅田」駅より徒歩約6分<br>JR「大阪」駅より徒歩約8分<br>ご来場には公共交通機関をご利用ください。<br><a href="https://www.umeda-act3hall.com/access/" target="_blank" rel="noopener noreferrer">会場公式アクセス案内</a></p>
+    <div class="map">
+      <iframe title="梅田アクト・スリーホールの地図" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5082.33236177114!2d135.5030674!3d34.7045175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e70c54bc2035%3A0x751aa18d2e660ba!2z5qKF55Sw44Ki44Kv44OI44K544Oq44O844Ob44O844Or!5e1!3m2!1sja!2sjp!4v1793775855114!5m2!1sja!2sjp" width="100%" height="100%" style="border:0;" allowfullscreen loading="eager" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <p class="map-direct"><a href="https://www.google.com/maps/search/?api=1&amp;query=アクトスリー・ホール+大阪市北区堂山町15-17" target="_blank" rel="noopener noreferrer">Google マップで開く・経路を調べる ↗</a></p>
+    <div class="map-note">※会場へ本イベントに関するお問い合わせはご遠慮ください。イベントに関するご質問・ご意見はお問い合わせフォームよりお願いします。</div>
+  </div>
+</section>
+
+<a aria-label="ページ上部へ戻る" href="#home" class="back-to-top" id="backToTop"></a>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-links">
+      <span class="foot-label">関連イベント：</span>
+      <a href="https://fesuta.web.fc2.com/" target="_blank">さいたま鉄道模型フェスタ</a>
+      <a href="https://tetsudoplace.com/" target="_blank">鉄道プレイス</a>
+    </div>
+    &copy; 2026 鉄道模型バザール実行委員会. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  var mediaSrc = {
+    poster: 'images/osaka-poster-013.jpg',
+    map: 'images/osaka-map-013.jpg'
+  };
+  function openModal(type){
+    var modal = document.getElementById('imageModal');
+    var img = document.getElementById('modalImage');
+    var dl = document.getElementById('downloadBtn');
+    img.src = mediaSrc[type];
+    dl.href = mediaSrc[type];
+    modal.classList.add('open');
+  }
+  function closeModal(e){
+    if(e.target.id === 'imageModal' || e.target.classList.contains('close')){
+      document.getElementById('imageModal').classList.remove('open');
+    }
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') document.getElementById('imageModal').classList.remove('open');
+  });
+  window.addEventListener('scroll', function(){
+    var b = document.getElementById('backToTop');
+    if(window.pageYOffset > 300) b.classList.add('show'); else b.classList.remove('show');
+  });
+</script>
+<script id="scroll-reveal">
+(function(){
+ if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ var targets=document.querySelectorAll('.section-head,.media-item,.content-item,.diorama,.exh,.access-box > h3,.access-box > .addr');
+ var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}});},{threshold:0.08});
+ targets.forEach(function(el,i){if(el.getBoundingClientRect().top<window.innerHeight)return;el.style.setProperty('--reveal-delay',(el.classList.contains('exh')?i%4*55:0)+'ms');el.classList.add('reveal-ready');observer.observe(el);});
+})();
+</script>
+</body>
+</html>

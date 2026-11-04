@@ -234,6 +234,18 @@
     .about-copy p{margin:0 auto;}
     .foot-links{flex-direction:column; gap:8px;}
   }
+
+/* Osaka 13 announcement */
+.stub-wrap{max-width:650px;margin-top:30px}
+.next-event{display:flex;flex-direction:column;gap:10px;padding:28px 26px;background:linear-gradient(115deg,#c8482c,#ed683d);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px;box-shadow:0 12px 30px rgba(0,0,0,.22);transition:transform .2s,box-shadow .2s}
+.next-event::before{display:none}.next-event:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(0,0,0,.3)}
+.next-event:focus-visible{outline:3px solid #ffe2a9;outline-offset:5px}
+.next-event-badge{font-size:.74rem;letter-spacing:.08em;color:#8c2c17;background:#fff0c4;padding:4px 14px;border-radius:30px}
+.next-event-title{font-size:clamp(1rem,2.8vw,1.4rem);font-weight:800;line-height:1.5}
+.next-event-date{font-size:.83rem;font-weight:500;color:#fff3e7}
+.next-event-action{display:flex;gap:24px;align-items:center;font-size:.94rem;padding:12px 22px;margin-top:6px;border-radius:4px;background:#fff;color:#a9321d;font-weight:800}
+.next-event-action span{font-size:1.25rem}
+@media(prefers-reduced-motion:reduce){.next-event{transition:none}.next-event:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -257,9 +269,9 @@
 <section class="hero">
   <div class="wrap">
     <div class="ticker">
-      <span class="dot"></span>NOW BOARDING — 次回開催案内
+      <span class="dot"></span>NOW BOARDING — 開催決定
       <span class="ticker-sep">|</span>
-      <span class="updated">最終更新 <span id="lastUpdated">2026.09.03</span></span>
+      <span class="updated">最終更新 <span id="lastUpdated">2026.11.04</span></span>
     </div>
     <h1>鉄道模型バザール</h1>
     <p class="lead">人気の鉄道模型メーカー＆ショップが大集合。<br>大阪で開催する特別な即売イベントです。</p>
@@ -276,10 +288,7 @@
     </div>
 
     <div class="stub-wrap">
-      <div class="stub soon">
-        第13回 おおさか鉄道模型バザール
-        <span class="soon-tag">詳細は近日公開</span>
-      </div>
+      <a class="stub next-event" href="osaka013.html"><span class="next-event-badge">次回開催決定！</span><span class="next-event-title">第13回 おおさか鉄道模型バザール</span><span class="next-event-date">2027年1月16日（土）・17日（日）</span><span class="next-event-action">次回イベントはこちら <span aria-hidden="true">→</span></span></a>
     </div>
   </div>
 </section>
