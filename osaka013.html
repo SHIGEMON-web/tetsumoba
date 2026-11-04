@@ -251,6 +251,17 @@ header.site{background:rgba(255,249,243,.96)}
 .reveal-ready{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease;transition-delay:var(--reveal-delay,0ms)}
 .reveal-ready.is-visible{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal-ready{opacity:1;transform:none;transition:none}}
+
+/* Aligned poster/map and program panels */
+.media-grid,.content-grid{width:100%;max-width:880px;margin-left:auto;margin-right:auto;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;border:1px solid var(--line);background:var(--line)}
+.content-grid{margin-top:32px}
+.media-item,.content-item{padding:22px 18px 24px;background:var(--surface);border:0;min-width:0}
+.program-image,.shorty-image.program-image{aspect-ratio:8/5;margin:0 0 20px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#fff0e5}
+.program-image img{width:100%;height:100%;object-fit:contain}
+.content-item h4{font-size:1rem;line-height:1.65;min-height:3.3em;margin:0 0 10px}
+.content-item p{margin:0;line-height:1.9}
+@media(max-width:640px){.media-grid,.content-grid{grid-template-columns:1fr}.content-item h4{min-height:0}.media-thumb{max-width:320px;margin-left:auto;margin-right:auto}}
+
 </style>
 <meta name="description" content="2027年1月16日・17日、梅田アクト・スリーホールで開催。第13回おおさか鉄道模型バザールの出展者一覧・イベント情報・アクセスをご案内します。">
 </head>
@@ -298,8 +309,8 @@ header.site{background:rgba(255,249,243,.96)}
       <div class="media-item"><button class="media-thumb" type="button" disabled onclick="openModal('map')" aria-label="会場マップを拡大"><img src="images/osaka-map-013.jpg" alt="第13回会場マップ" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true;this.parentElement.disabled=false" onerror="this.hidden=true"><span class="ph">会場マップ準備中</span></button><p>会場マップ</p></div>
     </div>
     <div class="content-grid">
-      <div class="content-item"><h4>人気の鉄道模型メーカーによる販売会</h4><p>鉄道模型メーカー＆ショップが大集合。車両キットやパーツ、ストラクチャーなど、各出展者の製品を展示・販売します。</p></div>
-      <div class="content-item"><h4>【企画展】ショーティー模型展</h4><div class="shorty-image"><img src="images/osaka-shorty-013.jpg" alt="ショーティー模型展の紹介写真" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true" onerror="this.hidden=true"><span class="ph">ショーティー模型展<br><small>紹介画像 準備中</small></span></div><p>ショーティー模型の展示を行います。展示内容や関連企画の詳細は、決まり次第お知らせします。</p></div>
+      <div class="content-item"><div class="program-image"><img src="images/event-shop.jpg" alt="鉄道模型の展示イメージ" loading="lazy"></div><h4>人気の鉄道模型メーカーによる販売会</h4><p>鉄道模型メーカー＆ショップが大集合。車両キットやパーツ、ストラクチャーなど、各出展者の製品を展示・販売します。</p></div>
+      <div class="content-item"><div class="shorty-image program-image"><img src="images/osaka-shorty-013.jpg" alt="ショーティー模型展の紹介写真" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true" onerror="this.hidden=true"><span class="ph">ショーティー模型展<br><small>紹介画像 準備中</small></span></div><h4>【企画展】ショーティー模型展</h4><p>ショーティー模型の展示を行います。展示内容や関連企画の詳細は、決まり次第お知らせします。</p></div>
     </div>
     <div class="diorama"><h4>開催に向けて準備を進めています</h4><p>ポスター・会場マップや催しの詳細は、順次こちらのページでご案内します。</p></div>
   </div>
